@@ -80,6 +80,10 @@ typedef struct OffsetRange {
     return _collectionView;
 }
 
+- (void)_dummyMethod {
+    NSLog(@"Hello world!");
+}
+
 - (void)setCollectionView:(UICollectionView *)collectionView {
     IGAssertMainThread();
 
