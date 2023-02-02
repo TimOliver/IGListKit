@@ -47,6 +47,7 @@ jobs:
       DEVELOPER_DIR: /Applications/Xcode_13.0.app
       WORKSPACE_NAME: IGListKit.xcworkspace
       SCHEME_NAME: IGListKit
+      COVERAGE_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     strategy:
       matrix:
         destination: ["name=iPhone 12 Pro"]
