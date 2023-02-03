@@ -80,7 +80,7 @@ jobs:
         env:
           COVERAGE_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CI_PULL_REQUEST: ${{ github.event.number }}
-          GIT_BRANCH: ${{ github.head_ref }}
+          GIT_BRANCH: ${{ github.head_ref || github.ref_name }} 
 
   Cocoapods:
     name: Cocoapods Lint 
