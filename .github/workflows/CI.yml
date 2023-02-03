@@ -79,6 +79,7 @@ jobs:
         run: bundle exec slather
         env:
           COVERAGE_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GIT_BRANCH: TestBranchName
 
   Cocoapods:
     name: Cocoapods Lint 
