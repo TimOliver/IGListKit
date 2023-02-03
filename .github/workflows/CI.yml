@@ -47,6 +47,7 @@ jobs:
       DEVELOPER_DIR: /Applications/Xcode_13.0.app
       WORKSPACE_NAME: IGListKit.xcworkspace
       SCHEME_NAME: IGListKit
+
     strategy:
       matrix:
         destination: ["name=iPhone 12 Pro"]
@@ -73,6 +74,13 @@ jobs:
           set -o pipefail
           xcodebuild build build-for-testing -workspace "${{ env.WORKSPACE_NAME }}" -scheme "${{ env.SCHEME_NAME }}" -destination "${{ matrix.destination }}" -configuration Debug ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES ONLY_ACTIVE_ARCH=YES | bundle exec xcpretty -c
           xcodebuild analyze test-without-building -workspace "${{ env.WORKSPACE_NAME }}" -scheme "${{ env.SCHEME_NAME }}" -destination "${{ matrix.destination }}" -configuration Debug ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES ONLY_ACTIVE_ARCH=YES | bundle exec xcpretty -c
+
+      - name: Run Slather
+        run: bundle exec slather
+        env:
+          COVERAGE_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CI_PULL_REQUEST: ${{ github.event.number }}
+          GIT_BRANCH: ${{ github.head_ref }}
 
   Cocoapods:
     name: Cocoapods Lint 
