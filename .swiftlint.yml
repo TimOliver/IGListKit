@@ -1,6 +1,6 @@
 included:
-  - Examples/*
-  - Source/IGListSwiftKit/*
+  - Examples
+  - Source/IGListSwiftKit
 
 excluded:
   - Pods
@@ -17,7 +17,6 @@ disabled_rules:
   - force_unwrapping
   - comma
   - line_length
-  - force_cast
 
 force_cast: warning
 force_try: warning
