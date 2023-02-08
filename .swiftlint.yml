@@ -1,7 +1,6 @@
 included:
-  - Examples-iOS
-  - Examples-macOS
-  - Examples-tvOS
+  - Examples
+  - Source/IGListSwiftKit
 
 excluded:
   - Pods
