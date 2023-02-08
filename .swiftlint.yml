@@ -1,6 +1,6 @@
 included:
-  - Examples
-  - Source/IGListSwiftKit
+  - Examples/*
+  - Source/IGListSwiftKit/*
 
 excluded:
   - Pods
