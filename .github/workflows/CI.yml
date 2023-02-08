@@ -3,12 +3,21 @@ name: "IGListKit CI"
 on: 
   push:
     branches: 
-      - master
+      - main
   pull_request:
     branches: 
       - '*'
 
 jobs:
+  Danger:
+    name: Danger
+    runs-on: macos-11
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run Danger
+        run: bundle exec danger --verbose
+
   macOS:
     name: Unit Test macOS
     runs-on: macos-11
