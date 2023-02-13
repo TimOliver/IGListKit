@@ -36,3 +36,9 @@ tvos_pods_not_updated = !git.modified_files.include?("Examples/Examples-tvOS/Pod
 if (added_source_files || deleted_source_files) && (ios_pods_not_updated || macos_pods_not_updated || tvos_pods_not_updated)
   warn("Adding or removing library source files requires updating the examples. Please run `./scripts/pod_setup.sh` from the root directory and commit the changes.")
 end
+
+swiftlint.verbose = true
+swiftlint.config_file = './.swiftlint.yml'
+swiftlint.directory = "Source"
+swiftlint.lint_files(inline_mode: true)
+
