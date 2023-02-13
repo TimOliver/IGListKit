@@ -12,6 +12,7 @@ opt_in_rules:
   - sorted_imports
   - vertical_parameter_alignment_on_call
   - overridden_super_call
+  - weak_delegate
 
 disabled_rules:
   - force_unwrapping
