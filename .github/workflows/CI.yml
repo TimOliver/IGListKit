@@ -244,3 +244,26 @@ jobs:
         run: |
           set -o pipefail
           xcodebuild build -workspace "${{ env.MACOS_EXAMPLE_WORKSPACE }}" -scheme "${{ env.EXAMPLE_SCHEME }}" -destination "${{ matrix.macOSDestination }}" ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c
+
+  swiftlint:
+    name: Run SwiftLint
+    runs-on: macos-11
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install SwiftLint
+        run: |
+          brew update
+          brew install swiftlint
+
+      - name: Run SwiftLint on IGListKit
+        run: |
+          set -o pipefail
+          swiftlint Source/IGListSwiftKit
+
+      - name: Run SwiftLint on Examples
+        run: |
+          set -o pipefail
+          swiftlint Examples
+
