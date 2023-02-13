@@ -42,6 +42,7 @@ public extension ListIdentifiable {
 
 public extension Sequence where Element: ListIdentifiable {
     func diffables() -> [ListDiffable] {
+        print "Hello world!" 
         return map { $0.diffable() }
     }
 }
