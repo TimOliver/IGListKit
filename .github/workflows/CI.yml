@@ -256,6 +256,7 @@ jobs:
         run: |
           brew update
           brew install swiftlint
+          brew link --overwrite swiftlint
 
       - name: Run SwiftLint on IGListKit
         run: |
