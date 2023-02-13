@@ -252,12 +252,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Install SwiftLint
-        run: |
-          brew update
-          brew install swiftlint
-          brew link --overwrite swiftlint
-
       - name: Run SwiftLint on IGListKit
         run: |
           set -o pipefail
