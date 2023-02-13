@@ -248,7 +248,7 @@ jobs:
   Danger:
     name: Run Danger
     if: github.event_name == 'pull_request'
-    runs-on: macos-11
+    runs-on: macos-12
     env:
       DANGER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
