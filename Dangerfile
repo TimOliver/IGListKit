@@ -39,6 +39,5 @@ end
 
 swiftlint.verbose = true
 swiftlint.config_file = './.swiftlint.yml'
-swiftlint.directory = "Source"
 swiftlint.lint_files(inline_mode: true)
 
