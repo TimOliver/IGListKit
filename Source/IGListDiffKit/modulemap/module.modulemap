@@ -1,0 +1,11 @@
+module IGListDiffKit {
+    requires objc_arc
+    header "../IGListDiff.h"
+    header "../IGListExperiments.h"
+    header "../IGListMacros.h"
+    header "../IGListBatchUpdateData.h"
+    header "../IGListAssert.h"
+    header "../NSNumber+IGListDiffable.h"
+    header "../NSString+IGListDiffable.h"
+    export *
+}

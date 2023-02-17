@@ -1,0 +1,5 @@
+module IGListKit {
+    requires objc_arc
+    header "../IGListKit.h"
+    export *
+}
