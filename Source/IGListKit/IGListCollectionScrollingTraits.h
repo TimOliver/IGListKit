@@ -14,9 +14,9 @@
 NS_SWIFT_NAME(ListCollectionScrollingTraits)
 typedef struct IGListCollectionScrollingTraits {
     /// returns YES if user has touched. may not yet have started dragging.
-    BOOL isTracking;
+    bool isTracking;
     /// returns YES if user has started scrolling. this may require some time and or distance to move to initiate dragging
-    BOOL isDragging;
+    bool isDragging;
     /// returns YES if user isn't dragging (touch up) but scroll view is still moving.
-    BOOL isDecelerating;
+    bool isDecelerating;
 } IGListCollectionScrollingTraits;

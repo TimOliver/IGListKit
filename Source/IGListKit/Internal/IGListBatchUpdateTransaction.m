@@ -7,7 +7,15 @@
 
 #import "IGListBatchUpdateTransaction.h"
 
-@import IGListDiffKit;
+#if !__has_include(<IGListDiffKit/IGListDiffKit.h>)
+#import "IGListAssert.h"
+#import "IGListDiffable.h"
+#import "IGListDiff.h"
+#else
+#import <IGListDiffKit/IGListAssert.h>
+#import <IGListDiffKit/IGListDiffable.h>
+#import <IGListDiffKit/IGListDiff.h>
+#endif
 
 #import "IGListAdapterUpdaterDelegate.h"
 

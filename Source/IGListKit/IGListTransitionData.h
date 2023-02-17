@@ -7,7 +7,11 @@
 
 #import <Foundation/Foundation.h>
 
-@import IGListDiffKit;
+#if !__has_include(<IGListDiffKit/IGListDiffKit.h>)
+#import "IGListMacros.h"
+#else
+#import <IGListDiffKit/IGListMacros.h>
+#endif
 
 NS_ASSUME_NONNULL_BEGIN
 

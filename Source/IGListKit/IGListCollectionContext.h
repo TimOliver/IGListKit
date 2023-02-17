@@ -7,7 +7,11 @@
 
 #import <UIKit/UIKit.h>
 
-@import IGListDiffKit;
+#if !__has_include(<IGListDiffKit/IGListDiffKit.h>)
+#import "IGListExperiments.h"
+#else
+#import <IGListDiffKit/IGListExperiments.h>
+#endif
 
 #import "IGListBatchContext.h"
 #import "IGListCollectionScrollingTraits.h"
