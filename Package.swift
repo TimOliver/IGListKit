@@ -43,7 +43,15 @@ let package = Package(
         .target(
             name: "IGListSwiftKit",
             dependencies: ["IGListKit"],
-            path: "Source/IGListSwiftKit"
+            path: "Source/IGListSwiftKit",
+            cSettings: [
+                .headerSearchPath(".."),
+                .headerSearchPath("../IGListDiffKit"),
+                .headerSearchPath("../IGListDiffKit/Internal"),
+                .headerSearchPath("../IGListKit"),
+                .headerSearchPath("../IGListKit/Internal"),
+                .unsafeFlags(["-xobjective-c++", "-fcxx-modules"])
+            ]
         ),
     ],
     cLanguageStandard: .c11,
