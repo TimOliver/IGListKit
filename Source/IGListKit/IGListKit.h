@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-#if !__has_include(<IGListDiffKit/IGListCompatibility.h>)
+#if !__has_include(<IGListDiffKit/IGListDiffKit.h>)
 #import "IGListCompatibility.h"
 #else
 #import <IGListDiffKit/IGListCompatibility.h>
