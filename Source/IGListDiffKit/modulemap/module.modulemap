@@ -1,10 +1,16 @@
 module IGListDiffKit {
     requires objc_arc
-    header "../IGListDiff.h"
-    header "../IGListExperiments.h"
-    header "../IGListMacros.h"
-    header "../IGListBatchUpdateData.h"
+    header "../IGListDiffKit.h"
+    header "../IGListCompatibility.h"
     header "../IGListAssert.h"
+    header "../IGListBatchUpdateData.h"
+    header "../IGListDiff.h"
+    header "../IGListDiffable.h"
+    header "../IGListExperiments.h"
+    header "../IGListIndexPathResult.h"
+    header "../IGListIndexSetResult.h"
+    header "../IGListMoveIndex.h"
+    header "../IGListMoveIndexPath.h"
     header "../NSNumber+IGListDiffable.h"
     header "../NSString+IGListDiffable.h"
     export *

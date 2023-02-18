@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		13DF01681F9D9CBD0092A320 /* ReorderableSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DF01671F9D9CBD0092A320 /* ReorderableSectionController.swift */; };
 		13DF016A1F9D9F600092A320 /* ReorderableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DF01691F9D9F600092A320 /* ReorderableViewController.swift */; };
+		22DBA6BD29A1103200EB64EF /* IGListKit in Frameworks */ = {isa = PBXBuildFile; productRef = 22DBA6BC29A1103200EB64EF /* IGListKit */; };
+		22DBA6BF29A1103700EB64EF /* IGListKit in Frameworks */ = {isa = PBXBuildFile; productRef = 22DBA6BE29A1103700EB64EF /* IGListKit */; };
+		22DBA6C129A1103B00EB64EF /* IGListKit in Frameworks */ = {isa = PBXBuildFile; productRef = 22DBA6C029A1103B00EB64EF /* IGListKit */; };
 		26271C8E1DAE9D3F0073E116 /* SingleSectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26271C8D1DAE9D3F0073E116 /* SingleSectionViewController.swift */; };
 		26271C921DAE9EFC0073E116 /* NibCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26271C911DAE9EFC0073E116 /* NibCell.xib */; };
 		26271C941DAE9F050073E116 /* NibCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26271C931DAE9F050073E116 /* NibCell.swift */; };
@@ -98,15 +101,6 @@
 		9DFF4CFB251F089E0048474A /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB684E0251B10C2002023DD /* UIColor+Extension.swift */; };
 		9DFF4D00251F089F0048474A /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB684E0251B10C2002023DD /* UIColor+Extension.swift */; };
 		9DFF4D06251F08F50048474A /* UIActivityIndicatorView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFF4D05251F08F50048474A /* UIActivityIndicatorView+Extension.swift */; };
-		BAB336E42760ECC1007B4098 /* IGListDiffKit in Frameworks */ = {isa = PBXBuildFile; productRef = BAB336E32760ECC1007B4098 /* IGListDiffKit */; };
-		BAB336E62760ECC1007B4098 /* IGListKit in Frameworks */ = {isa = PBXBuildFile; productRef = BAB336E52760ECC1007B4098 /* IGListKit */; };
-		BAB336E82760ECC1007B4098 /* IGListSwiftKit in Frameworks */ = {isa = PBXBuildFile; productRef = BAB336E72760ECC1007B4098 /* IGListSwiftKit */; };
-		BAB336EA2760ECE5007B4098 /* IGListKit in Frameworks */ = {isa = PBXBuildFile; productRef = BAB336E92760ECE5007B4098 /* IGListKit */; };
-		BAB336EC2760ECFE007B4098 /* IGListKit in Frameworks */ = {isa = PBXBuildFile; productRef = BAB336EB2760ECFE007B4098 /* IGListKit */; };
-		BAB336EE2760ED0C007B4098 /* IGListSwiftKit in Frameworks */ = {isa = PBXBuildFile; productRef = BAB336ED2760ED0C007B4098 /* IGListSwiftKit */; };
-		BAB336F02760ED28007B4098 /* IGListDiffKit in Frameworks */ = {isa = PBXBuildFile; productRef = BAB336EF2760ED28007B4098 /* IGListDiffKit */; };
-		BAB336F22760ED55007B4098 /* IGListDiffKit in Frameworks */ = {isa = PBXBuildFile; productRef = BAB336F12760ED55007B4098 /* IGListDiffKit */; };
-		BAB336F42760EDCB007B4098 /* IGListSwiftKit in Frameworks */ = {isa = PBXBuildFile; productRef = BAB336F32760EDCB007B4098 /* IGListSwiftKit */; };
 		EB0289A2202A11E0007E17D5 /* PersonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EB02899F202A11DF007E17D5 /* PersonModel.m */; };
 		EB0289A3202A11E0007E17D5 /* PersonModel.value in Resources */ = {isa = PBXBuildFile; fileRef = EB0289A0202A11DF007E17D5 /* PersonModel.value */; };
 		EB0289A6202A14E1007E17D5 /* ObjcGeneratedModelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB0289A5202A14E1007E17D5 /* ObjcGeneratedModelDemoViewController.m */; };
@@ -158,6 +152,7 @@
 /* Begin PBXFileReference section */
 		13DF01671F9D9CBD0092A320 /* ReorderableSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReorderableSectionController.swift; sourceTree = "<group>"; };
 		13DF01691F9D9F600092A320 /* ReorderableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReorderableViewController.swift; sourceTree = "<group>"; };
+		22DBA6BB29A10E5A00EB64EF /* IGListKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = IGListKit; path = ../..; sourceTree = "<group>"; };
 		26271C8D1DAE9D3F0073E116 /* SingleSectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleSectionViewController.swift; sourceTree = "<group>"; };
 		26271C911DAE9EFC0073E116 /* NibCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NibCell.xib; sourceTree = "<group>"; };
 		26271C931DAE9F050073E116 /* NibCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibCell.swift; sourceTree = "<group>"; };
@@ -257,7 +252,6 @@
 		9DB684E0251B10C2002023DD /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		9DFF4D05251F08F50048474A /* UIActivityIndicatorView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIActivityIndicatorView+Extension.swift"; sourceTree = "<group>"; };
 		B7B1FA2EFFA5E994FEE587DE /* Pods_IGListKitMessageExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IGListKitMessageExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BAB336E22760EC95007B4098 /* IGListKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = IGListKit; path = ../..; sourceTree = "<group>"; };
 		BAB337022760F50D007B4098 /* IGListKitExamples.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IGListKitExamples.entitlements; sourceTree = "<group>"; };
 		EB02899F202A11DF007E17D5 /* PersonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonModel.m; sourceTree = "<group>"; };
 		EB0289A0202A11DF007E17D5 /* PersonModel.value */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PersonModel.value; sourceTree = "<group>"; };
@@ -278,9 +272,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAB336E42760ECC1007B4098 /* IGListDiffKit in Frameworks */,
-				BAB336E62760ECC1007B4098 /* IGListKit in Frameworks */,
-				BAB336E82760ECC1007B4098 /* IGListSwiftKit in Frameworks */,
+				22DBA6BD29A1103200EB64EF /* IGListKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,9 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				986FB7131DBBA60900A65C18 /* Messages.framework in Frameworks */,
-				BAB336F22760ED55007B4098 /* IGListDiffKit in Frameworks */,
-				BAB336EC2760ECFE007B4098 /* IGListKit in Frameworks */,
-				BAB336F42760EDCB007B4098 /* IGListSwiftKit in Frameworks */,
+				22DBA6BF29A1103700EB64EF /* IGListKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,9 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				986FB7311DBBAD8600A65C18 /* NotificationCenter.framework in Frameworks */,
-				BAB336EA2760ECE5007B4098 /* IGListKit in Frameworks */,
-				BAB336F02760ED28007B4098 /* IGListDiffKit in Frameworks */,
-				BAB336EE2760ED0C007B4098 /* IGListSwiftKit in Frameworks */,
+				22DBA6C129A1103B00EB64EF /* IGListKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,11 +356,11 @@
 		2961B3811D68B031001C9451 = {
 			isa = PBXGroup;
 			children = (
-				BAB336E12760EC95007B4098 /* Packages */,
 				2961B38C1D68B031001C9451 /* IGListKitExamples */,
 				986FB7141DBBA60900A65C18 /* IGListKitMessageExample */,
 				986FB7321DBBAD8600A65C18 /* IGListKitTodayExample */,
 				95F7F9121DE5006C00A64FEE /* IGListKitExamples-UITests */,
+				BAB336E12760EC95007B4098 /* Packages */,
 				2961B38B1D68B031001C9451 /* Products */,
 				0853E82EF5C5E4BD4E0760E3 /* Frameworks */,
 			);
@@ -567,7 +555,7 @@
 		BAB336E12760EC95007B4098 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				BAB336E22760EC95007B4098 /* IGListKit */,
+				22DBA6BB29A10E5A00EB64EF /* IGListKit */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -603,9 +591,7 @@
 			);
 			name = IGListKitExamples;
 			packageProductDependencies = (
-				BAB336E32760ECC1007B4098 /* IGListDiffKit */,
-				BAB336E52760ECC1007B4098 /* IGListKit */,
-				BAB336E72760ECC1007B4098 /* IGListSwiftKit */,
+				22DBA6BC29A1103200EB64EF /* IGListKit */,
 			);
 			productName = IGListKitExamples;
 			productReference = 2961B38A1D68B031001C9451 /* IGListKitExamples.app */;
@@ -643,9 +629,7 @@
 			);
 			name = IGListKitMessageExample;
 			packageProductDependencies = (
-				BAB336EB2760ECFE007B4098 /* IGListKit */,
-				BAB336F12760ED55007B4098 /* IGListDiffKit */,
-				BAB336F32760EDCB007B4098 /* IGListSwiftKit */,
+				22DBA6BE29A1103700EB64EF /* IGListKit */,
 			);
 			productName = MessageExtension;
 			productReference = 986FB7111DBBA60900A65C18 /* IGListKitMessageExample.appex */;
@@ -665,9 +649,7 @@
 			);
 			name = IGListKitTodayExample;
 			packageProductDependencies = (
-				BAB336E92760ECE5007B4098 /* IGListKit */,
-				BAB336ED2760ED0C007B4098 /* IGListSwiftKit */,
-				BAB336EF2760ED28007B4098 /* IGListDiffKit */,
+				22DBA6C029A1103B00EB64EF /* IGListKit */,
 			);
 			productName = IGListKitTodayExample;
 			productReference = 986FB72F1DBBAD8600A65C18 /* IGListKitTodayExample.appex */;
@@ -1046,7 +1028,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = IGListKitExamples/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1054,7 +1036,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.instagram.IGListKitExamples;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "IGListKitExamples/ViewControllers/IGListKitExamples-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1074,7 +1058,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = IGListKitExamples/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1082,7 +1066,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.instagram.IGListKitExamples;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "IGListKitExamples/ViewControllers/IGListKitExamples-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1279,41 +1265,17 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		BAB336E32760ECC1007B4098 /* IGListDiffKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = IGListDiffKit;
-		};
-		BAB336E52760ECC1007B4098 /* IGListKit */ = {
+		22DBA6BC29A1103200EB64EF /* IGListKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = IGListKit;
 		};
-		BAB336E72760ECC1007B4098 /* IGListSwiftKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = IGListSwiftKit;
-		};
-		BAB336E92760ECE5007B4098 /* IGListKit */ = {
+		22DBA6BE29A1103700EB64EF /* IGListKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = IGListKit;
 		};
-		BAB336EB2760ECFE007B4098 /* IGListKit */ = {
+		22DBA6C029A1103B00EB64EF /* IGListKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = IGListKit;
-		};
-		BAB336ED2760ED0C007B4098 /* IGListSwiftKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = IGListSwiftKit;
-		};
-		BAB336EF2760ED28007B4098 /* IGListDiffKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = IGListDiffKit;
-		};
-		BAB336F12760ED55007B4098 /* IGListDiffKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = IGListDiffKit;
-		};
-		BAB336F32760EDCB007B4098 /* IGListSwiftKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = IGListSwiftKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
