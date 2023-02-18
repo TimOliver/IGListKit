@@ -12,6 +12,10 @@
 		22DBA6BD29A1103200EB64EF /* IGListKit in Frameworks */ = {isa = PBXBuildFile; productRef = 22DBA6BC29A1103200EB64EF /* IGListKit */; };
 		22DBA6BF29A1103700EB64EF /* IGListKit in Frameworks */ = {isa = PBXBuildFile; productRef = 22DBA6BE29A1103700EB64EF /* IGListKit */; };
 		22DBA6C129A1103B00EB64EF /* IGListKit in Frameworks */ = {isa = PBXBuildFile; productRef = 22DBA6C029A1103B00EB64EF /* IGListKit */; };
+		22EBC99F29A1140B001FE3C7 /* IGListDiffKit in Frameworks */ = {isa = PBXBuildFile; productRef = 22EBC99E29A1140B001FE3C7 /* IGListDiffKit */; };
+		22EBC9A129A1140F001FE3C7 /* IGListDiffKit in Frameworks */ = {isa = PBXBuildFile; productRef = 22EBC9A029A1140F001FE3C7 /* IGListDiffKit */; };
+		22EBC9A329A11412001FE3C7 /* IGListDiffKit in Frameworks */ = {isa = PBXBuildFile; productRef = 22EBC9A229A11412001FE3C7 /* IGListDiffKit */; };
+		22EBC9A529A1143C001FE3C7 /* IGListSwiftKit in Frameworks */ = {isa = PBXBuildFile; productRef = 22EBC9A429A1143C001FE3C7 /* IGListSwiftKit */; };
 		26271C8E1DAE9D3F0073E116 /* SingleSectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26271C8D1DAE9D3F0073E116 /* SingleSectionViewController.swift */; };
 		26271C921DAE9EFC0073E116 /* NibCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26271C911DAE9EFC0073E116 /* NibCell.xib */; };
 		26271C941DAE9F050073E116 /* NibCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26271C931DAE9F050073E116 /* NibCell.swift */; };
@@ -272,7 +276,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22EBC99F29A1140B001FE3C7 /* IGListDiffKit in Frameworks */,
 				22DBA6BD29A1103200EB64EF /* IGListKit in Frameworks */,
+				22EBC9A529A1143C001FE3C7 /* IGListSwiftKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +294,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				986FB7131DBBA60900A65C18 /* Messages.framework in Frameworks */,
+				22EBC9A129A1140F001FE3C7 /* IGListDiffKit in Frameworks */,
 				22DBA6BF29A1103700EB64EF /* IGListKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -297,6 +304,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				986FB7311DBBAD8600A65C18 /* NotificationCenter.framework in Frameworks */,
+				22EBC9A329A11412001FE3C7 /* IGListDiffKit in Frameworks */,
 				22DBA6C129A1103B00EB64EF /* IGListKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -592,6 +600,8 @@
 			name = IGListKitExamples;
 			packageProductDependencies = (
 				22DBA6BC29A1103200EB64EF /* IGListKit */,
+				22EBC99E29A1140B001FE3C7 /* IGListDiffKit */,
+				22EBC9A429A1143C001FE3C7 /* IGListSwiftKit */,
 			);
 			productName = IGListKitExamples;
 			productReference = 2961B38A1D68B031001C9451 /* IGListKitExamples.app */;
@@ -630,6 +640,7 @@
 			name = IGListKitMessageExample;
 			packageProductDependencies = (
 				22DBA6BE29A1103700EB64EF /* IGListKit */,
+				22EBC9A029A1140F001FE3C7 /* IGListDiffKit */,
 			);
 			productName = MessageExtension;
 			productReference = 986FB7111DBBA60900A65C18 /* IGListKitMessageExample.appex */;
@@ -650,6 +661,7 @@
 			name = IGListKitTodayExample;
 			packageProductDependencies = (
 				22DBA6C029A1103B00EB64EF /* IGListKit */,
+				22EBC9A229A11412001FE3C7 /* IGListDiffKit */,
 			);
 			productName = IGListKitTodayExample;
 			productReference = 986FB72F1DBBAD8600A65C18 /* IGListKitTodayExample.appex */;
@@ -1276,6 +1288,22 @@
 		22DBA6C029A1103B00EB64EF /* IGListKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = IGListKit;
+		};
+		22EBC99E29A1140B001FE3C7 /* IGListDiffKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = IGListDiffKit;
+		};
+		22EBC9A029A1140F001FE3C7 /* IGListDiffKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = IGListDiffKit;
+		};
+		22EBC9A229A11412001FE3C7 /* IGListDiffKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = IGListDiffKit;
+		};
+		22EBC9A429A1143C001FE3C7 /* IGListSwiftKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = IGListSwiftKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
