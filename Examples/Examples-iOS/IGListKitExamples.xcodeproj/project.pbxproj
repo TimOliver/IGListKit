@@ -11,10 +11,8 @@
 		13DF016A1F9D9F600092A320 /* ReorderableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DF01691F9D9F600092A320 /* ReorderableViewController.swift */; };
 		22DBA6BD29A1103200EB64EF /* IGListKit in Frameworks */ = {isa = PBXBuildFile; productRef = 22DBA6BC29A1103200EB64EF /* IGListKit */; };
 		22DBA6BF29A1103700EB64EF /* IGListKit in Frameworks */ = {isa = PBXBuildFile; productRef = 22DBA6BE29A1103700EB64EF /* IGListKit */; };
-		22DBA6C129A1103B00EB64EF /* IGListKit in Frameworks */ = {isa = PBXBuildFile; productRef = 22DBA6C029A1103B00EB64EF /* IGListKit */; };
 		22EBC99F29A1140B001FE3C7 /* IGListDiffKit in Frameworks */ = {isa = PBXBuildFile; productRef = 22EBC99E29A1140B001FE3C7 /* IGListDiffKit */; };
 		22EBC9A129A1140F001FE3C7 /* IGListDiffKit in Frameworks */ = {isa = PBXBuildFile; productRef = 22EBC9A029A1140F001FE3C7 /* IGListDiffKit */; };
-		22EBC9A329A11412001FE3C7 /* IGListDiffKit in Frameworks */ = {isa = PBXBuildFile; productRef = 22EBC9A229A11412001FE3C7 /* IGListDiffKit */; };
 		22EBC9A529A1143C001FE3C7 /* IGListSwiftKit in Frameworks */ = {isa = PBXBuildFile; productRef = 22EBC9A429A1143C001FE3C7 /* IGListSwiftKit */; };
 		26271C8E1DAE9D3F0073E116 /* SingleSectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26271C8D1DAE9D3F0073E116 /* SingleSectionViewController.swift */; };
 		26271C921DAE9EFC0073E116 /* NibCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26271C911DAE9EFC0073E116 /* NibCell.xib */; };
@@ -110,6 +108,8 @@
 		EB0289A6202A14E1007E17D5 /* ObjcGeneratedModelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB0289A5202A14E1007E17D5 /* ObjcGeneratedModelDemoViewController.m */; };
 		EB0289A9202A1507007E17D5 /* PersonSectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB0289A8202A1507007E17D5 /* PersonSectionController.m */; };
 		EB0289AC202A1705007E17D5 /* PersonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB0289AA202A1705007E17D5 /* PersonCell.m */; };
+		F18E417A29A479FE004DC192 /* IGListDiffKit in Frameworks */ = {isa = PBXBuildFile; productRef = F18E417929A479FE004DC192 /* IGListDiffKit */; };
+		F18E417C29A479FE004DC192 /* IGListKit in Frameworks */ = {isa = PBXBuildFile; productRef = F18E417B29A479FE004DC192 /* IGListKit */; };
 		FF73FF9C1FBA4B4400F2AB06 /* UserFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF73FF9B1FBA4B4400F2AB06 /* UserFooterView.swift */; };
 		FF73FF9E1FBA4B5500F2AB06 /* UserFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF73FF9D1FBA4B5500F2AB06 /* UserFooterView.xib */; };
 /* End PBXBuildFile section */
@@ -303,9 +303,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F18E417A29A479FE004DC192 /* IGListDiffKit in Frameworks */,
+				F18E417C29A479FE004DC192 /* IGListKit in Frameworks */,
 				986FB7311DBBAD8600A65C18 /* NotificationCenter.framework in Frameworks */,
-				22EBC9A329A11412001FE3C7 /* IGListDiffKit in Frameworks */,
-				22DBA6C129A1103B00EB64EF /* IGListKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -660,8 +660,8 @@
 			);
 			name = IGListKitTodayExample;
 			packageProductDependencies = (
-				22DBA6C029A1103B00EB64EF /* IGListKit */,
-				22EBC9A229A11412001FE3C7 /* IGListDiffKit */,
+				F18E417929A479FE004DC192 /* IGListDiffKit */,
+				F18E417B29A479FE004DC192 /* IGListKit */,
 			);
 			productName = IGListKitTodayExample;
 			productReference = 986FB72F1DBBAD8600A65C18 /* IGListKitTodayExample.appex */;
@@ -1285,10 +1285,6 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = IGListKit;
 		};
-		22DBA6C029A1103B00EB64EF /* IGListKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = IGListKit;
-		};
 		22EBC99E29A1140B001FE3C7 /* IGListDiffKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = IGListDiffKit;
@@ -1297,13 +1293,17 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = IGListDiffKit;
 		};
-		22EBC9A229A11412001FE3C7 /* IGListDiffKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = IGListDiffKit;
-		};
 		22EBC9A429A1143C001FE3C7 /* IGListSwiftKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = IGListSwiftKit;
+		};
+		F18E417929A479FE004DC192 /* IGListDiffKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = IGListDiffKit;
+		};
+		F18E417B29A479FE004DC192 /* IGListKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = IGListKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
