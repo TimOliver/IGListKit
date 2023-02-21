@@ -34,23 +34,13 @@ let package = Package(
             cSettings: [
                 .headerSearchPath("."),
                 .headerSearchPath("Internal"),
-                .headerSearchPath("../IGListDiffKit"),
-                .headerSearchPath("../IGListDiffKit/Internal"),
                 .unsafeFlags(["-xobjective-c++", "-fcxx-modules"])
             ]
         ),
         .target(
             name: "IGListSwiftKit",
             dependencies: ["IGListKit"],
-            path: "Source/IGListSwiftKit",
-            cSettings: [
-                .headerSearchPath(".."),
-                .headerSearchPath("../IGListDiffKit"),
-                .headerSearchPath("../IGListDiffKit/Internal"),
-                .headerSearchPath("../IGListKit"),
-                .headerSearchPath("../IGListKit/Internal"),
-                .unsafeFlags(["-xobjective-c++", "-fcxx-modules"])
-            ]
+            path: "Source/IGListSwiftKit"
         ),
     ],
     cLanguageStandard: .c11,
