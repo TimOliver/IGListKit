@@ -19,7 +19,7 @@ let package = Package(
         .target(
             name: "IGListDiffKit",
             path: "Source/IGListDiffKit",
-            publicHeadersPath: "ModuleMap",
+            publicHeadersPath: "modulemap",
             cSettings: [
                 .headerSearchPath("."),
                 .headerSearchPath("Internal"),
@@ -30,13 +30,12 @@ let package = Package(
             name: "IGListKit",
             dependencies: ["IGListDiffKit"],
             path: "Source/IGListKit",
-            publicHeadersPath: "ModuleMap",
+            publicHeadersPath: "modulemap",
             cSettings: [
-                .headerSearchPath(".."),
-                .headerSearchPath("../IGListDiffKit"),
-                .headerSearchPath("../IGListDiffKit/Internal"),
                 .headerSearchPath("."),
                 .headerSearchPath("Internal"),
+                .headerSearchPath("../IGListDiffKit"),
+                .headerSearchPath("../IGListDiffKit/Internal"),
                 .unsafeFlags(["-xobjective-c++", "-fcxx-modules"])
             ]
         ),
