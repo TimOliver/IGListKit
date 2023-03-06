@@ -5,11 +5,11 @@ let package = Package(
     name: "IGListKit",
     platforms: [ .iOS(.v9),
                  .tvOS(.v9),
-                 .macOS(.v10_15),
+                 .macOS(.v10_11),
     ],
     products: [
         .library(name: "IGListDiffKit",
-                 type: .static ,
+                 type: .static,
                  targets: ["IGListDiffKit"]),
         .library(name: "IGListKit",
                  type: .static,
