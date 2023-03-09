@@ -53,6 +53,17 @@ static IGListMoveIndex *newMove(NSInteger from, NSInteger to) {
     XCTAssertNotNil(result);
 }
 
+- (void)test_whenEmptyUpdates_thatObjectIsEqualToItself {
+    IGListBatchUpdateData *result = [[IGListBatchUpdateData alloc] initWithInsertSections:indexSet(@[])
+                                                                           deleteSections:indexSet(@[])
+                                                                             moveSections:[NSSet new]
+                                                                         insertIndexPaths:@[]
+                                                                         deleteIndexPaths:@[]
+                                                                         updateIndexPaths:@[]
+                                                                           moveIndexPaths:@[]];
+    XCTAssertTrue([result isEqual:result]);
+}
+
 - (void)test_whenUpdatesAreClean_thatResultMatches {
     IGListBatchUpdateData *result = [[IGListBatchUpdateData alloc] initWithInsertSections:indexSet(@[@0, @1])
                                                                            deleteSections:indexSet(@[@5])
@@ -149,6 +160,45 @@ static IGListMoveIndex *newMove(NSInteger from, NSInteger to) {
                                                                            moveIndexPaths:@[]];
 
     XCTAssertEqualObjects(result.deleteIndexPaths, @[newPath(2, 0)]);
+}
+
+- (void)test_whenTwoDifferentObjects_thatObjectsAreNotEqual {
+    IGListBatchUpdateData *emptyResult = [[IGListBatchUpdateData alloc] initWithInsertSections:indexSet(@[])
+                                                                                deleteSections:indexSet(@[])
+                                                                                  moveSections:[NSSet new]
+                                                                              insertIndexPaths:@[]
+                                                                              deleteIndexPaths:@[]
+                                                                              updateIndexPaths:@[]
+                                                                                moveIndexPaths:@[]];
+
+    IGListBatchUpdateData *movingResult = [[IGListBatchUpdateData alloc] initWithInsertSections:indexSet(@[])
+                                                                           deleteSections:indexSet(@[@2])
+                                                                             moveSections:[NSSet setWithArray:@[newMove(2, 6), newMove(0, 2)]]
+                                                                         insertIndexPaths:@[]
+                                                                         deleteIndexPaths:@[]
+                                                                         updateIndexPaths:@[]
+                                                                           moveIndexPaths:@[]];
+
+    XCTAssertFalse([emptyResult isEqual:movingResult]);
+}
+
+- (void)test_whenUpdatesAreClean_thatDescriptionStringIsValid {
+    IGListBatchUpdateData *result = [[IGListBatchUpdateData alloc] initWithInsertSections:indexSet(@[@0, @1])
+                                                                           deleteSections:indexSet(@[@5])
+                                                                             moveSections:[NSSet setWithArray:@[newMove(3, 4)]]
+                                                                         insertIndexPaths:@[newPath(0, 0)]
+                                                                         deleteIndexPaths:@[newPath(1, 0)]
+                                                                         updateIndexPaths:@[]
+                                                                           moveIndexPaths:@[newMovePath(6, 0, 6, 1)]];
+    NSString *const description = result.description;
+    NSString *const targetDescription = [NSString stringWithFormat:@"<IGListBatchUpdateData %p; "
+                                                                    "deleteSections: 1; "
+                                                                    "insertSections: 2; "
+                                                                    "moveSections: 1; "
+                                                                    "deleteIndexPaths: 1; "
+                                                                    "insertIndexPaths: 1; "
+                                                                    "updateIndexPaths: 0>", result];
+    XCTAssertTrue([description isEqualToString:targetDescription]);
 }
 
 @end
