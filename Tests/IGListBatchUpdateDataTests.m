@@ -182,6 +182,18 @@ static IGListMoveIndex *newMove(NSInteger from, NSInteger to) {
     XCTAssertFalse([emptyResult isEqual:movingResult]);
 }
 
+- (void)test_whenEmptyUpdates_thatResultDoesNotEqualOtherClasses {
+    IGListBatchUpdateData *emptyResult = [[IGListBatchUpdateData alloc] initWithInsertSections:indexSet(@[])
+                                                                                deleteSections:indexSet(@[])
+                                                                                  moveSections:[NSSet new]
+                                                                              insertIndexPaths:@[]
+                                                                              deleteIndexPaths:@[]
+                                                                              updateIndexPaths:@[]
+                                                                                moveIndexPaths:@[]];
+
+    XCTAssertFalse([emptyResult isEqual:[NSObject new]]);
+}
+
 - (void)test_whenUpdatesAreClean_thatDescriptionStringIsValid {
     IGListBatchUpdateData *result = [[IGListBatchUpdateData alloc] initWithInsertSections:indexSet(@[@0, @1])
                                                                            deleteSections:indexSet(@[@5])
