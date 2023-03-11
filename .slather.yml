@@ -6,3 +6,4 @@ scheme: IGListKit
 source_directory: Source
 ignore:
   - "../**/*/Xcode*"
+  - "Tests/*"
