@@ -84,9 +84,9 @@ static NSArray *sorted(NSArray *arr) {
     NSArray *n = @[@2, @1];
     IGListIndexSetResult *result = IGListDiff(o, n, IGListDiffEquality);
     NSArray *expected = @[
-                          [[IGListMoveIndex alloc] initWithFrom:0 to:1],
-                          [[IGListMoveIndex alloc] initWithFrom:1 to:0],
-                          ];
+        [[IGListMoveIndex alloc] initWithFrom:0 to:1],
+        [[IGListMoveIndex alloc] initWithFrom:1 to:0],
+    ];
     NSArray<IGListMoveIndexPath *> *sortedMoves = sorted(result.moves);
     XCTAssertEqualObjects(sortedMoves, expected);
     XCTAssertEqual([result changeCount], 2);
@@ -128,24 +128,24 @@ static NSArray *sorted(NSArray *arr) {
     NSArray *n = @[@2, @4, @5, @3];
     IGListIndexPathResult *result = IGListDiffPaths(0, 0, o, n, IGListDiffEquality);
     NSArray *expected = @[
-                          [[IGListMoveIndexPath alloc] initWithFrom:genIndexPath(2, 0) to:genIndexPath(3, 0)],
-                          [[IGListMoveIndexPath alloc] initWithFrom:genIndexPath(3, 0) to:genIndexPath(1, 0)],
-                          ];
+        [[IGListMoveIndexPath alloc] initWithFrom:genIndexPath(2, 0) to:genIndexPath(3, 0)],
+        [[IGListMoveIndexPath alloc] initWithFrom:genIndexPath(3, 0) to:genIndexPath(1, 0)],
+    ];
     NSArray<IGListMoveIndexPath *> *sortedMoves = sorted(result.moves);
     XCTAssertEqualObjects(sortedMoves, expected);
 }
 
 - (void)test_whenObjectEqualityChanges_thatResultHasUpdates {
     NSArray *o = @[
-                   genTestObject(@"0", @0),
-                   genTestObject(@"1", @1),
-                   genTestObject(@"2", @2),
-                   ];
+        genTestObject(@"0", @0),
+        genTestObject(@"1", @1),
+        genTestObject(@"2", @2),
+    ];
     NSArray *n = @[
-                   genTestObject(@"0", @0),
-                   genTestObject(@"1", @3), // value updated from @1 to @3
-                   genTestObject(@"2", @2),
-                   ];
+        genTestObject(@"0", @0),
+        genTestObject(@"1", @3), // value updated from @1 to @3
+        genTestObject(@"2", @2),
+    ];
     IGListIndexPathResult *result = IGListDiffPaths(0, 0, o, n, IGListDiffEquality);
     NSArray *expected = @[genIndexPath(1, 0)];
     XCTAssertEqualObjects(result.updates, expected);
@@ -180,9 +180,9 @@ static NSArray *sorted(NSArray *arr) {
     NSIndexSet *expectedDeletes = indexSetWithIndexes(@[@1, @8]);
     NSIndexSet *expectedInserts = indexSetWithIndexes(@[@6, @8]);
     NSArray *expectedMoves = @[
-                               [[IGListMoveIndex alloc] initWithFrom:5 to:7],
-                               [[IGListMoveIndex alloc] initWithFrom:7 to:4],
-                               ];
+        [[IGListMoveIndex alloc] initWithFrom:5 to:7],
+        [[IGListMoveIndex alloc] initWithFrom:7 to:4],
+    ];
     NSArray<IGListMoveIndexPath *> *sortedMoves = sorted(result.moves);
     XCTAssertEqualObjects(result.deletes, expectedDeletes);
     XCTAssertEqualObjects(result.inserts, expectedInserts);
@@ -191,23 +191,23 @@ static NSArray *sorted(NSArray *arr) {
 
 - (void)test_whenMovingItems_withEqualityChanges_thatResultsHasMovesAndUpdates {
     NSArray *o = @[
-                   genTestObject(@"0", @0),
-                   genTestObject(@"1", @1),
-                   genTestObject(@"2", @2),
-                   ];
-
+        genTestObject(@"0", @0),
+        genTestObject(@"1", @1),
+        genTestObject(@"2", @2),
+    ];
+    
     // objects 0 and 2 are swapped and object at original index 2 has its data changed to @3
     NSArray *n = @[
-                   genTestObject(@"2", @3),
-                   genTestObject(@"1", @1),
-                   genTestObject(@"0", @0),
-                   ];
-
+        genTestObject(@"2", @3),
+        genTestObject(@"1", @1),
+        genTestObject(@"0", @0),
+    ];
+    
     IGListIndexSetResult *result = IGListDiff(o, n, IGListDiffEquality);
     NSArray *expectedMoves = @[
-                               [[IGListMoveIndex alloc] initWithFrom:0 to:2],
-                               [[IGListMoveIndex alloc] initWithFrom:2 to:0],
-                               ];
+        [[IGListMoveIndex alloc] initWithFrom:0 to:2],
+        [[IGListMoveIndex alloc] initWithFrom:2 to:0],
+    ];
     NSIndexSet *expectedUpdates = [NSIndexSet indexSetWithIndex:2];
     NSArray<IGListMoveIndexPath *> *sortedMoves = sorted(result.moves);
     XCTAssertEqualObjects(result.updates, expectedUpdates);
@@ -216,15 +216,15 @@ static NSArray *sorted(NSArray *arr) {
 
 - (void)test_whenDiffingPointers_withObjectCopy_thatResultHasUpdate {
     NSArray *o = @[
-                   genTestObject(@"0", @0),
-                   genTestObject(@"1", @1),
-                   genTestObject(@"2", @2),
-                   ];
+        genTestObject(@"0", @0),
+        genTestObject(@"1", @1),
+        genTestObject(@"2", @2),
+    ];
     NSArray *n = @[
-                   o[0],
-                   [o[1] copy], // new pointer
-                   o[2],
-                   ];
+        o[0],
+        [o[1] copy], // new pointer
+        o[2],
+    ];
     IGListIndexPathResult *result = IGListDiffPaths(0, 0, o, n, IGListDiffPointerPersonality);
     NSArray *expected = @[genIndexPath(1, 0)];
     XCTAssertEqualObjects(result.updates, expected);
@@ -232,10 +232,10 @@ static NSArray *sorted(NSArray *arr) {
 
 - (void)test_whenDiffingPointers_withSameObjects_thatResultHasNoChanges {
     NSArray *o = @[
-                   genTestObject(@"0", @0),
-                   genTestObject(@"1", @1),
-                   genTestObject(@"2", @2),
-                   ];
+        genTestObject(@"0", @0),
+        genTestObject(@"1", @1),
+        genTestObject(@"2", @2),
+    ];
     NSArray *n = [o copy];
     IGListIndexPathResult *result = IGListDiffPaths(0, 0, o, n, IGListDiffPointerPersonality);
     XCTAssertFalse([result hasChanges]);
@@ -358,22 +358,22 @@ static NSArray *sorted(NSArray *arr) {
 
 - (void)test_whenDiffing_withBatchUpdateResult_thatIndexesMatch {
     NSArray *o = @[
-                   genTestObject(@1, @1),
-                   genTestObject(@2, @1),
-                   genTestObject(@3, @1),
-                   genTestObject(@4, @1),
-                   genTestObject(@5, @1),
-                   genTestObject(@6, @1),
-                   ];
+        genTestObject(@1, @1),
+        genTestObject(@2, @1),
+        genTestObject(@3, @1),
+        genTestObject(@4, @1),
+        genTestObject(@5, @1),
+        genTestObject(@6, @1),
+    ];
     NSArray *n = @[
-                   // deleted
-                   genTestObject(@2, @2), // updated
-                   genTestObject(@5, @1), // moved
-                   genTestObject(@4, @1),
-                   genTestObject(@7, @1), // inserted
-                   genTestObject(@6, @2), // updated
-                   genTestObject(@3, @2), // moved+updated
-                   ];
+        // deleted
+        genTestObject(@2, @2), // updated
+        genTestObject(@5, @1), // moved
+        genTestObject(@4, @1),
+        genTestObject(@7, @1), // inserted
+        genTestObject(@6, @2), // updated
+        genTestObject(@3, @2), // moved+updated
+    ];
     IGListIndexSetResult *result = [IGListDiff(o, n, IGListDiffEquality) resultForBatchUpdates];
     XCTAssertEqual(result.updates.count, 0);
     NSArray *expectedMoves = @[ [[IGListMoveIndex alloc] initWithFrom:4 to:1] ];
@@ -392,22 +392,22 @@ static NSArray *sorted(NSArray *arr) {
 
 - (void)test_whenDiffing_withBatchUpdateResult_thatIndexPathsMatch {
     NSArray *o = @[
-                   genTestObject(@1, @1),
-                   genTestObject(@2, @1),
-                   genTestObject(@3, @1),
-                   genTestObject(@4, @1),
-                   genTestObject(@5, @1),
-                   genTestObject(@6, @1),
-                   ];
+        genTestObject(@1, @1),
+        genTestObject(@2, @1),
+        genTestObject(@3, @1),
+        genTestObject(@4, @1),
+        genTestObject(@5, @1),
+        genTestObject(@6, @1),
+    ];
     NSArray *n = @[
-                   // deleted
-                   genTestObject(@2, @2), // updated
-                   genTestObject(@5, @1), // moved
-                   genTestObject(@4, @1),
-                   genTestObject(@7, @1), // inserted
-                   genTestObject(@6, @2), // updated
-                   genTestObject(@3, @2), // moved+updated
-                   ];
+        // deleted
+        genTestObject(@2, @2), // updated
+        genTestObject(@5, @1), // moved
+        genTestObject(@4, @1),
+        genTestObject(@7, @1), // inserted
+        genTestObject(@6, @2), // updated
+        genTestObject(@3, @2), // moved+updated
+    ];
     IGListIndexPathResult *result = [IGListDiffPaths(0, 1, o, n, IGListDiffEquality) resultForBatchUpdates];
     XCTAssertEqual(result.updates.count, 0);
     NSArray *expectedMoves = @[ [[IGListMoveIndexPath alloc] initWithFrom:genIndexPath(4, 0) to:genIndexPath(1, 1)] ];
@@ -417,4 +417,18 @@ static NSArray *sorted(NSArray *arr) {
     NSArray *expectedInserts = @[genIndexPath(0, 1), genIndexPath(3, 1), genIndexPath(4, 1), genIndexPath(5, 1)];
     XCTAssertEqualObjects(sorted(result.inserts), expectedInserts);
 }
+
+- (void)test_whenDiffingPaths_thatIndexPathResultDescriptionStringIsValid {
+    NSArray *o = @[@(0), @(1), @(2), @(3)];
+    NSArray *n = @[@(2), @(0), @(4), @(5), @(3), @(6)];
+    IGListIndexPathResult *result = IGListDiffPaths(0, 1, o, n, IGListDiffEquality);
+    NSString *expectedDescription = [NSString stringWithFormat:@"<IGListIndexPathResult %p; "
+                                                                 "3 inserts; "
+                                                                 "1 deletes; "
+                                                                 "0 updates; "
+                                                                 "2 moves>", result];
+    XCTAssertTrue([result hasChanges]);
+    XCTAssertTrue([result.description isEqualToString:expectedDescription]);
+}
+
 @end
