@@ -418,6 +418,19 @@ static NSArray *sorted(NSArray *arr) {
     XCTAssertEqualObjects(sorted(result.inserts), expectedInserts);
 }
 
+- (void)test_whenDiffing_thatIndexSetResultDescriptionStringIsValid {
+    NSArray *o = @[@(0), @(1), @(2), @(3)];
+    NSArray *n = @[@(2), @(0), @(4), @(5), @(3), @(6)];
+    IGListIndexSetResult *result = IGListDiff(o, n, IGListDiffEquality);
+    NSString *expectedDescription = [NSString stringWithFormat:@"<IGListIndexSetResult %p; "
+                                                                 "3 inserts; "
+                                                                 "1 deletes; "
+                                                                 "0 updates; "
+                                                                 "2 moves>", result];
+    XCTAssertTrue(result.changeCount > 0);
+    XCTAssertTrue([result.description isEqualToString:expectedDescription]);
+}
+
 - (void)test_whenDiffingPaths_thatIndexPathResultDescriptionStringIsValid {
     NSArray *o = @[@(0), @(1), @(2), @(3)];
     NSArray *n = @[@(2), @(0), @(4), @(5), @(3), @(6)];
