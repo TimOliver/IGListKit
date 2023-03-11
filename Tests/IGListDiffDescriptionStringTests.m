@@ -28,10 +28,10 @@
     
     NSIndexSet *deleteSections = [NSIndexSet indexSetWithIndex:5];
     IGListMoveIndex *moveSections = [[IGListMoveIndex alloc] initWithFrom:3 to:4];
-    NSIndexPath *insertIndexPaths = [NSIndexPath indexPathForRow:0 inSection:0];
-    NSIndexPath *deleteIndexPaths = [NSIndexPath indexPathForRow:0 inSection:0];
-    IGListMoveIndexPath *moveIndexPaths = [[IGListMoveIndexPath alloc] initWithFrom:[NSIndexPath indexPathForRow:0 inSection:6]
-                                                                                 to:[NSIndexPath indexPathForRow:1 inSection:6]];
+    NSIndexPath *insertIndexPaths = [NSIndexPath indexPathForItem:0 inSection:0];
+    NSIndexPath *deleteIndexPaths = [NSIndexPath indexPathForItem:0 inSection:0];
+    IGListMoveIndexPath *moveIndexPaths = [[IGListMoveIndexPath alloc] initWithFrom:[NSIndexPath indexPathForItem:0 inSection:6]
+                                                                                 to:[NSIndexPath indexPathForItem:1 inSection:6]];
     
     IGListBatchUpdateData *result = [[IGListBatchUpdateData alloc] initWithInsertSections:insertSections
                                                                            deleteSections:deleteSections
@@ -51,19 +51,19 @@
 }
 
 - (void)test_withIndexPathResult_thatDescriptionStringIsValid {
-    NSArray *inserts = @[[NSIndexPath indexPathForRow:0 inSection:0]];
+    NSArray *inserts = @[[NSIndexPath indexPathForItem:0 inSection:0]];
     NSArray *deletes = @[
-        [NSIndexPath indexPathForRow:0 inSection:1],
-        [NSIndexPath indexPathForRow:1 inSection:1]
+        [NSIndexPath indexPathForItem:0 inSection:1],
+        [NSIndexPath indexPathForItem:1 inSection:1]
     ];
     NSArray *updates = @[
-        [NSIndexPath indexPathForRow:1 inSection:0]
+        [NSIndexPath indexPathForItem:1 inSection:0]
     ];
     NSArray *moves = @[
-        [[IGListMoveIndexPath alloc] initWithFrom:[NSIndexPath indexPathForRow:1 inSection:3]
-                                               to:[NSIndexPath indexPathForRow:2 inSection:3]],
-        [[IGListMoveIndexPath alloc] initWithFrom:[NSIndexPath indexPathForRow:4 inSection:3]
-                                               to:[NSIndexPath indexPathForRow:3 inSection:3]]
+        [[IGListMoveIndexPath alloc] initWithFrom:[NSIndexPath indexPathForItem:1 inSection:3]
+                                               to:[NSIndexPath indexPathForItem:2 inSection:3]],
+        [[IGListMoveIndexPath alloc] initWithFrom:[NSIndexPath indexPathForItem:4 inSection:3]
+                                               to:[NSIndexPath indexPathForItem:3 inSection:3]]
     ];
     
     IGListIndexPathResult *result = [[IGListIndexPathResult alloc] initWithInserts:inserts
@@ -124,8 +124,8 @@
 }
 
 - (void)test_withMoveIndexPath_thatDescriptionStringIsValid {
-    NSIndexPath *from = [NSIndexPath indexPathForRow:1 inSection:1];
-    NSIndexPath *to = [NSIndexPath indexPathForRow:3 inSection:1];
+    NSIndexPath *from = [NSIndexPath indexPathForItem:1 inSection:1];
+    NSIndexPath *to = [NSIndexPath indexPathForItem:3 inSection:1];
     IGListMoveIndexPath *moveIndexPath = [[IGListMoveIndexPath alloc] initWithFrom:from to:to];
 
     NSString *expectedDescription = [NSString stringWithFormat:@"<IGListMoveIndexPath %p; "
