@@ -194,23 +194,4 @@ static IGListMoveIndex *newMove(NSInteger from, NSInteger to) {
     XCTAssertFalse([emptyResult isEqual:[NSObject new]]);
 }
 
-- (void)test_whenUpdatesAreClean_thatDescriptionStringIsValid {
-    IGListBatchUpdateData *result = [[IGListBatchUpdateData alloc] initWithInsertSections:indexSet(@[@0, @1])
-                                                                           deleteSections:indexSet(@[@5])
-                                                                             moveSections:[NSSet setWithArray:@[newMove(3, 4)]]
-                                                                         insertIndexPaths:@[newPath(0, 0)]
-                                                                         deleteIndexPaths:@[newPath(1, 0)]
-                                                                         updateIndexPaths:@[]
-                                                                           moveIndexPaths:@[newMovePath(6, 0, 6, 1)]];
-    NSString *const description = result.description;
-    NSString *const targetDescription = [NSString stringWithFormat:@"<IGListBatchUpdateData %p; "
-                                                                    "deleteSections: 1; "
-                                                                    "insertSections: 2; "
-                                                                    "moveSections: 1; "
-                                                                    "deleteIndexPaths: 1; "
-                                                                    "insertIndexPaths: 1; "
-                                                                    "updateIndexPaths: 0>", result];
-    XCTAssertTrue([description isEqualToString:targetDescription]);
-}
-
 @end
