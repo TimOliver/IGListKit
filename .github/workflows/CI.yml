@@ -68,6 +68,9 @@ jobs:
       - name: Install pods.
         run: pod install
 
+      - name: Prewarm iOS Simulator
+        run: open -a Simulator && xcrun simctl boot 'iPhone 13 Pro'
+
       - name: iOS - ${{ matrix.destination }}
         run: |
           set -o pipefail
