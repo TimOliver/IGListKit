@@ -205,7 +205,7 @@ jobs:
     strategy:
       matrix:
         iosDestination: ["platform=iOS Simulator,name=iPhone 13 Pro"]
-        tvOSDestination: ["platform=tvOS Simulator,name=Apple TV 4K"]
+        tvOSDestination: ["platform=tvOS Simulator,name=Apple TV 4K (3rd generation)"]
         macOSDestination: ["platform=macOS"]
         macCatalystDestination: ["platform=macOS,variant=Mac Catalyst"]
     steps:
