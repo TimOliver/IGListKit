@@ -85,7 +85,7 @@ jobs:
     name: Cocoapods Lint
     runs-on: macos-12
     env:
-      DEVELOPER_DIR: /Applications/Xcode_14.2.app
+      DEVELOPER_DIR: /Applications/Xcode_13.4.1.app
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -183,9 +183,9 @@ jobs:
 
   Carthage-Legacy-Lipo-Binaries:
     name: Verify Carthage build lipo binaries
-    runs-on: macos-12
+    runs-on: macos-11
     env:
-      DEVELOPER_DIR: /Applications/Xcode_14.2.app
+      DEVELOPER_DIR: /Applications/Xcode_11.7.app
     steps:
       - name: Checkout
         uses: actions/checkout@v3
