@@ -69,7 +69,9 @@ jobs:
         run: pod install
 
       - name: Prewarm iOS Simulator
-        run: open -a Simulator && xcrun simctl boot 'iPhone 13 Pro'
+        run: |
+              chmod 1777 /Volumes/Macintosh\ HD/private/tmp
+              open -a Simulator && xcrun simctl boot 'iPhone 13 Pro'
 
       - name: iOS - ${{ matrix.destination }}
         run: |
