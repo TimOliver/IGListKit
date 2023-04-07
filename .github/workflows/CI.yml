@@ -204,8 +204,8 @@ jobs:
       EXAMPLE_SCHEME: IGListKitExamples
     strategy:
       matrix:
-        iosDestination: ["name=iPhone 12 Pro"]
-        tvOSDestination: ["name=Apple TV 4K"]
+        iosDestination: ["platform=iOS Simulator,name=iPhone 13 Pro"]
+        tvOSDestination: ["platform=tvOS Simulator,name=Apple TV 4K"]
         macOSDestination: ["platform=macOS"]
         macCatalystDestination: ["platform=macOS,variant=Mac Catalyst"]
     steps:
