@@ -33,24 +33,24 @@
     IGListTestAdapterDataSource *dataSource1 = [IGListTestAdapterDataSource new];
     dataSource1.objects = @[@1, @2, @3];
     IGListAdapter *adapter1 = [[IGListAdapter alloc] initWithUpdater:[IGListAdapterUpdater new] viewController:nil workingRangeSize:0];
+    adapter1.collectionView = collectionView;
     [adapter1.registeredCellIdentifiers addObject:@"IGCellIdentifier"];
     [adapter1.registeredNibNames addObject:@"IGCellNibName"];
-    adapter1.collectionView = collectionView;
     adapter1.dataSource = dataSource1;
 
     IGListTestAdapterDataSource *dataSource2 = [IGListTestAdapterDataSource new];
     dataSource2.objects = @[@1, @2, @3];
     IGListAdapter *adapter2 = [[IGListAdapter alloc] initWithUpdater:[IGListAdapterUpdater new] viewController:controller workingRangeSize:2];
-    [adapter1.registeredSupplementaryViewIdentifiers addObject:@"IGSupplementaryViewIdentifier"];
-    [adapter1.registeredSupplementaryViewNibNames addObject:@"IGSupplementaryNibName"];
     adapter2.collectionView = collectionView;
+    [adapter2.registeredSupplementaryViewIdentifiers addObject:@"IGSupplementaryViewIdentifier"];
+    [adapter2.registeredSupplementaryViewNibNames addObject:@"IGSupplementaryNibName"];
     adapter2.dataSource = dataSource2;
 
     IGListTestAdapterDataSource *dataSource3 = [IGListTestAdapterDataSource new];
     dataSource3.objects = @[@1, @2, @3];
     IGListAdapter *adapter3 = [[IGListAdapter alloc] initWithUpdater:[IGListAdapterUpdater new] viewController:controller workingRangeSize:2];
-    adapter3.previousSectionMap = [[IGListSectionMap alloc] initWithMapTable:[[NSMapTable alloc] init]];
     adapter3.collectionView = collectionView;
+    adapter3.previousSectionMap = [[IGListSectionMap alloc] initWithMapTable:[[NSMapTable alloc] init]];
     adapter3.dataSource = dataSource3;
 
     [collectionView setNeedsLayout];
