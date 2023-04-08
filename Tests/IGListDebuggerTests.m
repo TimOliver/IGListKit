@@ -11,6 +11,7 @@
 
 #import "IGListAdapterInternal.h"
 #import "IGListAdapterUpdaterInternal.h"
+#import "IGListBindingSectionController.h"
 #import "IGListDebugger.h"
 #import "IGListMoveIndexInternal.h"
 #import "IGListMoveIndexPathInternal.h"
@@ -48,7 +49,8 @@
     [adapter3.registeredNibNames addObject:@"IGCellNibName"];
     [adapter3.registeredSupplementaryViewIdentifiers addObject:@"IGSupplementaryViewIdentifier"];
     [adapter3.registeredSupplementaryViewNibNames addObject:@"IGSupplementaryNibName"];
-    adapter3.previousSectionMap = [[IGListSectionMap alloc] initWithMapTable:[[NSMapTable alloc] init]];
+    adapter3.previousSectionMap = [[IGListSectionMap alloc] initWithMapTable:[NSMapTable strongToStrongObjectsMapTable]];
+    [adapter3.previousSectionMap updateWithObjects:@[@1] sectionControllers:@[[[IGListBindingSectionController alloc] init]]];
 
     [collectionView setNeedsLayout];
     [collectionView layoutIfNeeded];
