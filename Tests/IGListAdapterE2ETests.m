@@ -1339,7 +1339,7 @@
     [self waitForExpectationsWithTimeout:30 handler:nil];
 }
 
-- (void)_test_whenInsertingItemsTwice_withDataUpdatedTwice_thatAllUpdatesAppliedWithoutException {
+- (void)test_whenInsertingItemsTwice_withDataUpdatedTwice_thatAllUpdatesAppliedWithoutException {
     [self setupWithObjects:@[
         genTestObject(@1, @2),
     ]];
@@ -1360,7 +1360,7 @@
     [self waitForExpectationsWithTimeout:30 handler:nil];
 }
 
-- (void)FIXME_test_whenDeletingItemsTwice_withDataUpdatedTwice_thatAllUpdatesAppliedWithoutException {
+- (void)test_whenDeletingItemsTwice_withDataUpdatedTwice_thatAllUpdatesAppliedWithoutException {
     [self setupWithObjects:@[
         genTestObject(@1, @4),
     ]];
