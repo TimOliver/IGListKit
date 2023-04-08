@@ -29,6 +29,7 @@
 		16B71CEE22B0A08400FE96ED /* IGTestInvalidateLayoutDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B71CE822B0A08300FE96ED /* IGTestInvalidateLayoutDataSource.m */; };
 		16B71CEF22B0A08400FE96ED /* IGTestInvalidateLayoutObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B71CEA22B0A08300FE96ED /* IGTestInvalidateLayoutObject.m */; };
 		16B71CF022B0A08400FE96ED /* IGTestInvalidateLayoutObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B71CEA22B0A08300FE96ED /* IGTestInvalidateLayoutObject.m */; };
+		22EC117229E11BD9002311A8 /* IGListSectionControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22EC117129E11BD9002311A8 /* IGListSectionControllerTests.m */; };
 		262373C2015556E71A70FA30 /* Pods_IGListKit_tvOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E980179F5E885E417EB20D55 /* Pods_IGListKit_tvOSTests.framework */; };
 		26271C8A1DAE94E40073E116 /* IGTestSingleNibItemDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 26271C891DAE94E40073E116 /* IGTestSingleNibItemDataSource.m */; };
 		26271C8C1DAE96740073E116 /* IGListSingleNibItemControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 26271C8B1DAE96740073E116 /* IGListSingleNibItemControllerTests.m */; };
@@ -491,6 +492,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		054EE3A93C23AE19E7917EA0 /* Pods-IGListKit-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IGListKit-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-IGListKit-tvOSTests/Pods-IGListKit-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		13DF01711FA0FD400092A320 /* IGListTestAdapterReorderingDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGListTestAdapterReorderingDataSource.h; sourceTree = "<group>"; };
 		13DF01721FA0FD400092A320 /* IGListTestAdapterReorderingDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IGListTestAdapterReorderingDataSource.m; sourceTree = "<group>"; };
 		13DF01751FA1000E0092A320 /* IGTestReorderableSection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGTestReorderableSection.h; sourceTree = "<group>"; };
@@ -502,6 +504,8 @@
 		16B71CE922B0A08300FE96ED /* IGTestInvalidateLayoutObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGTestInvalidateLayoutObject.h; sourceTree = "<group>"; };
 		16B71CEA22B0A08300FE96ED /* IGTestInvalidateLayoutObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGTestInvalidateLayoutObject.m; sourceTree = "<group>"; };
 		1AB7195278D0BBB5DA88D36F /* Pods_IGListKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IGListKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D954EF10884B4E2D2DC4DE0 /* Pods-IGListKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IGListKitTests.release.xcconfig"; path = "Target Support Files/Pods-IGListKitTests/Pods-IGListKitTests.release.xcconfig"; sourceTree = "<group>"; };
+		22EC117129E11BD9002311A8 /* IGListSectionControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGListSectionControllerTests.m; sourceTree = "<group>"; };
 		26271C881DAE94E40073E116 /* IGTestSingleNibItemDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGTestSingleNibItemDataSource.h; sourceTree = "<group>"; };
 		26271C891DAE94E40073E116 /* IGTestSingleNibItemDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGTestSingleNibItemDataSource.m; sourceTree = "<group>"; };
 		26271C8B1DAE96740073E116 /* IGListSingleNibItemControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGListSingleNibItemControllerTests.m; sourceTree = "<group>"; };
@@ -696,6 +700,7 @@
 		82914C591E6E2DEC0066C2F8 /* IGListTestContainerSizeSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGListTestContainerSizeSection.h; sourceTree = "<group>"; };
 		82914C5A1E6E2DEC0066C2F8 /* IGListTestContainerSizeSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGListTestContainerSizeSection.m; sourceTree = "<group>"; };
 		829D7BA81DD1816400549816 /* IGListSectionMapTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGListSectionMapTests.m; sourceTree = "<group>"; };
+		83EFBF1923E19786AFF79354 /* Pods-IGListKit-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IGListKit-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-IGListKit-tvOSTests/Pods-IGListKit-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		88144EE21D870EDC007C7F66 /* IGListAdapterE2ETests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGListAdapterE2ETests.m; sourceTree = "<group>"; };
 		88144EE31D870EDC007C7F66 /* IGListAdapterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGListAdapterTests.m; sourceTree = "<group>"; };
 		88144EE41D870EDC007C7F66 /* IGListAdapterUpdaterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGListAdapterUpdaterTests.m; sourceTree = "<group>"; };
@@ -703,7 +708,6 @@
 		88144EE61D870EDC007C7F66 /* IGListDiffSwiftTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGListDiffSwiftTests.swift; sourceTree = "<group>"; };
 		88144EE81D870EDC007C7F66 /* IGListDiffTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGListDiffTests.m; sourceTree = "<group>"; };
 		88144EE91D870EDC007C7F66 /* IGListDisplayHandlerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGListDisplayHandlerTests.m; sourceTree = "<group>"; };
-		88144EEB1D870EDC007C7F66 /* IGListKitTests-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IGListKitTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		88144EED1D870EDC007C7F66 /* IGListSingleSectionControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGListSingleSectionControllerTests.m; sourceTree = "<group>"; };
 		88144EEF1D870EDC007C7F66 /* IGListWorkingRangeHandlerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGListWorkingRangeHandlerTests.m; sourceTree = "<group>"; };
 		88144EF11D870EDC007C7F66 /* IGListTestAdapterDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGListTestAdapterDataSource.h; sourceTree = "<group>"; };
@@ -732,6 +736,7 @@
 		887D0B3F1D870D7F009E01F7 /* IGListKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IGListKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		887D0B571D870E1E009E01F7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88DF897C1E010E6A00B1B9B4 /* IGListKit-macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "IGListKit-macOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BC3F06510B3F2BB0D610A44 /* Pods-IGListKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IGListKitTests.debug.xcconfig"; path = "Target Support Files/Pods-IGListKitTests/Pods-IGListKitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BA4A65222760278F00FA5750 /* ListValueSectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListValueSectionController.swift; sourceTree = "<group>"; };
 		BA4A65232760278F00FA5750 /* ListIdentifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListIdentifiable.swift; sourceTree = "<group>"; };
 		DD3152AC1DE227FA00AC9D2C /* IGListKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IGListKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1114,6 +1119,7 @@
 				887D0B371D870D7E009E01F7 /* Products */,
 				0B3B927E1E08D7F5008390ED /* Source */,
 				887D0B551D870E1E009E01F7 /* Tests */,
+				C5CF52FC01C4BFC1EA9315E1 /* Pods */,
 			);
 			sourceTree = "<group>";
 			usesTabs = 0;
@@ -1157,7 +1163,7 @@
 				88144EE81D870EDC007C7F66 /* IGListDiffTests.m */,
 				88144EE91D870EDC007C7F66 /* IGListDisplayHandlerTests.m */,
 				29DA5CA21EA7C72400113926 /* IGListGenericSectionControllerTests.m */,
-				88144EEB1D870EDC007C7F66 /* IGListKitTests-Bridging-Header.h */,
+				22EC117129E11BD9002311A8 /* IGListSectionControllerTests.m */,
 				829D7BA81DD1816400549816 /* IGListSectionMapTests.m */,
 				26271C8B1DAE96740073E116 /* IGListSingleNibItemControllerTests.m */,
 				88144EED1D870EDC007C7F66 /* IGListSingleSectionControllerTests.m */,
@@ -1171,6 +1177,17 @@
 				88144EF01D870EDC007C7F66 /* Objects */,
 			);
 			path = Tests;
+			sourceTree = "<group>";
+		};
+		C5CF52FC01C4BFC1EA9315E1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				054EE3A93C23AE19E7917EA0 /* Pods-IGListKit-tvOSTests.debug.xcconfig */,
+				83EFBF1923E19786AFF79354 /* Pods-IGListKit-tvOSTests.release.xcconfig */,
+				8BC3F06510B3F2BB0D610A44 /* Pods-IGListKitTests.debug.xcconfig */,
+				1D954EF10884B4E2D2DC4DE0 /* Pods-IGListKitTests.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1579,8 +1596,6 @@
 				887D0B421D870D7F009E01F7 /* PBXTargetDependency */,
 			);
 			name = IGListKitTests;
-			packageProductDependencies = (
-			);
 			productName = IGListKitTests;
 			productReference = 887D0B3F1D870D7F009E01F7 /* IGListKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -1691,8 +1706,6 @@
 				en,
 			);
 			mainGroup = 887D0B2C1D870D7E009E01F7;
-			packageReferences = (
-			);
 			productRefGroup = 887D0B371D870D7E009E01F7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -2119,6 +2132,7 @@
 				88144F0A1D870EDC007C7F66 /* IGListBatchUpdateDataTests.m in Sources */,
 				26271C8C1DAE96740073E116 /* IGListSingleNibItemControllerTests.m in Sources */,
 				29DA5CA31EA7C72400113926 /* IGListGenericSectionControllerTests.m in Sources */,
+				22EC117229E11BD9002311A8 /* IGListSectionControllerTests.m in Sources */,
 				2997D4971DF5FC0B005A5DD2 /* IGReloadDataUpdaterTests.m in Sources */,
 				13DF01771FA1000E0092A320 /* IGTestReorderableSection.m in Sources */,
 				829D7BAA1DD1819000549816 /* IGListSectionMapTests.m in Sources */,
@@ -2611,6 +2625,7 @@
 		};
 		885FE1E71DC51A0D009CE2B4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 054EE3A93C23AE19E7917EA0 /* Pods-IGListKit-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
@@ -2636,6 +2651,7 @@
 		};
 		885FE1E81DC51A0D009CE2B4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 83EFBF1923E19786AFF79354 /* Pods-IGListKit-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
@@ -2954,6 +2970,7 @@
 		};
 		887D0B4E1D870D7F009E01F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8BC3F06510B3F2BB0D610A44 /* Pods-IGListKitTests.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Manual;
@@ -2979,6 +2996,7 @@
 		};
 		887D0B4F1D870D7F009E01F7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1D954EF10884B4E2D2DC4DE0 /* Pods-IGListKitTests.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Manual;
