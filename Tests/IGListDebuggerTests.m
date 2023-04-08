@@ -58,6 +58,7 @@
 
     NSArray *descriptions = [IGListDebugger adapterDescriptions];
     XCTAssertEqual(descriptions.count, 3);
+    XCTAssertTrue([[IGListDebugger dump] length] > 0);
 }
 
 @end
