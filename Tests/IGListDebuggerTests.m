@@ -30,28 +30,25 @@
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0,0,320,480)
                                                           collectionViewLayout:[UICollectionViewFlowLayout new]];
 
-    IGListTestAdapterDataSource *dataSource1 = [IGListTestAdapterDataSource new];
-    dataSource1.objects = @[@1, @2, @3];
+    IGListTestAdapterDataSource *dataSource = [IGListTestAdapterDataSource new];
+    dataSource.objects = @[@1, @2, @3];
     IGListAdapter *adapter1 = [[IGListAdapter alloc] initWithUpdater:[IGListAdapterUpdater new] viewController:nil workingRangeSize:0];
     adapter1.collectionView = collectionView;
-    [adapter1.registeredCellIdentifiers addObject:@"IGCellIdentifier"];
-    [adapter1.registeredNibNames addObject:@"IGCellNibName"];
-    adapter1.dataSource = dataSource1;
+    adapter1.dataSource = dataSource;
 
-    IGListTestAdapterDataSource *dataSource2 = [IGListTestAdapterDataSource new];
-    dataSource2.objects = @[@1, @2, @3];
     IGListAdapter *adapter2 = [[IGListAdapter alloc] initWithUpdater:[IGListAdapterUpdater new] viewController:controller workingRangeSize:2];
     adapter2.collectionView = collectionView;
-    [adapter2.registeredSupplementaryViewIdentifiers addObject:@"IGSupplementaryViewIdentifier"];
-    [adapter2.registeredSupplementaryViewNibNames addObject:@"IGSupplementaryNibName"];
-    adapter2.dataSource = dataSource2;
+    adapter2.dataSource = dataSource;
 
-    IGListTestAdapterDataSource *dataSource3 = [IGListTestAdapterDataSource new];
-    dataSource3.objects = @[@1, @2, @3];
     IGListAdapter *adapter3 = [[IGListAdapter alloc] initWithUpdater:[IGListAdapterUpdater new] viewController:controller workingRangeSize:2];
     adapter3.collectionView = collectionView;
+    adapter3.dataSource = dataSource;
+
+    [adapter3.registeredCellIdentifiers addObject:@"IGCellIdentifier"];
+    [adapter3.registeredNibNames addObject:@"IGCellNibName"];
+    [adapter3.registeredSupplementaryViewIdentifiers addObject:@"IGSupplementaryViewIdentifier"];
+    [adapter3.registeredSupplementaryViewNibNames addObject:@"IGSupplementaryNibName"];
     adapter3.previousSectionMap = [[IGListSectionMap alloc] initWithMapTable:[[NSMapTable alloc] init]];
-    adapter3.dataSource = dataSource3;
 
     [collectionView setNeedsLayout];
     [collectionView layoutIfNeeded];
