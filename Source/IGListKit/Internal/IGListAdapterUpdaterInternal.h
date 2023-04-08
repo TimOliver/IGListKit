@@ -26,6 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (IGListUpdateTransactionBuilder *)transactionBuilder;
 - (IGListUpdateTransactionBuilder *)lastTransactionBuilder;
 
+- (void)setTransaction:(id<IGListUpdateTransactable>)transaction;
+
 @end
 
 NS_ASSUME_NONNULL_END
