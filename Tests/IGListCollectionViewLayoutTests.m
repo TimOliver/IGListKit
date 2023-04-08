@@ -65,7 +65,8 @@ static const CGRect kTestFrame = (CGRect){{0, 0}, {100, 100}};
 
 - (void)setUpCollectionViewAndDataSource:(CGRect)testFrame {
     self.dataSource = [IGLayoutTestDataSource new];
-    self.collectionView = [[IGListCollectionView alloc] initWithFrame:testFrame listCollectionViewLayout:self.layout];
+    self.collectionView = [[IGListCollectionView alloc] initWithFrame:testFrame];
+    self.collectionView.collectionViewLayout = self.layout;
     self.collectionView.dataSource = self.dataSource;
     self.collectionView.delegate = self.dataSource;
     [self.dataSource configCollectionView:self.collectionView];
