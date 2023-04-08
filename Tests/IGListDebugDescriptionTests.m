@@ -15,6 +15,9 @@
 #import "IGListAdapterUpdater+DebugDescription.h"
 #import "IGListAdapterUpdaterInternal.h"
 #import "IGListAdapterInternal.h"
+#import "IGListBatchUpdateData+DebugDescription.h"
+#import "IGListMoveIndexInternal.h"
+#import "IGListMoveIndexPathINternal.h"
 #import "IGListTestAdapterDataSource.h"
 #import "IGListTestCase.h"
 #import "IGListUpdateTransactable.h"
@@ -67,6 +70,29 @@
 
     [[[transactionMock expect] andReturnValue:@(IGListBatchUpdateStateExecutedBatchUpdateBlock)] state];
     XCTAssertTrue(updater.debugDescriptionLines.count > 0);
+}
+
+- (void)test_withBatchUpdateData_thatDebugDescriptionIsValid {
+    NSMutableIndexSet *insertSections = [NSMutableIndexSet indexSet];
+    [insertSections addIndex:0];
+    [insertSections addIndex:1];
+
+    NSIndexSet *deleteSections = [NSIndexSet indexSetWithIndex:5];
+    IGListMoveIndex *moveSections = [[IGListMoveIndex alloc] initWithFrom:3 to:4];
+    NSIndexPath *insertIndexPaths = [NSIndexPath indexPathForItem:0 inSection:0];
+    NSIndexPath *deleteIndexPaths = [NSIndexPath indexPathForItem:0 inSection:0];
+    IGListMoveIndexPath *moveIndexPaths = [[IGListMoveIndexPath alloc] initWithFrom:[NSIndexPath indexPathForItem:0 inSection:6]
+                                                                                 to:[NSIndexPath indexPathForItem:1 inSection:6]];
+
+    IGListBatchUpdateData *data = [[IGListBatchUpdateData alloc] initWithInsertSections:insertSections
+                                                                           deleteSections:deleteSections
+                                                                             moveSections:[NSSet setWithObject:moveSections]
+                                                                         insertIndexPaths:@[insertIndexPaths]
+                                                                         deleteIndexPaths:@[deleteIndexPaths]
+                                                                         updateIndexPaths:@[]
+                                                                           moveIndexPaths:@[moveIndexPaths]];
+
+    XCTAssertTrue(data.debugDescriptionLines.count > 0);
 }
 
 @end
