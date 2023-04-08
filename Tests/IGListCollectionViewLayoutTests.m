@@ -12,13 +12,14 @@
 #import "IGLayoutTestDataSource.h"
 #import "IGLayoutTestItem.h"
 #import "IGLayoutTestSection.h"
+#import "IGListCollectionView.h"
 #import "IGListCollectionViewLayoutInternal.h"
 #import "IGListTestHelpers.h"
 
 @interface IGListCollectionViewLayoutTests : XCTestCase
 
 @property (nonatomic, strong) IGListCollectionViewLayout *layout;
-@property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, strong) IGListCollectionView *collectionView;
 @property (nonatomic, strong) IGLayoutTestDataSource *dataSource;
 
 @end
@@ -64,7 +65,7 @@ static const CGRect kTestFrame = (CGRect){{0, 0}, {100, 100}};
 
 - (void)setUpCollectionViewAndDataSource:(CGRect)testFrame {
     self.dataSource = [IGLayoutTestDataSource new];
-    self.collectionView = [[UICollectionView alloc] initWithFrame:testFrame collectionViewLayout:self.layout];
+    self.collectionView = [[IGListCollectionView alloc] initWithFrame:testFrame listCollectionViewLayout:self.layout];
     self.collectionView.dataSource = self.dataSource;
     self.collectionView.delegate = self.dataSource;
     [self.dataSource configCollectionView:self.collectionView];
