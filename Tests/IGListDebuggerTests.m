@@ -26,17 +26,29 @@
     [IGListDebugger clear];
 
     UIViewController *controller = [UIViewController new];
-    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:[UICollectionViewFlowLayout new]];
+    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0,0,320,480)
+                                                          collectionViewLayout:[UICollectionViewFlowLayout new]];
 
-    IGListTestAdapterDataSource *dataSource = [IGListTestAdapterDataSource new];
-    dataSource.objects = @[@1, @2, @3];
+    IGListTestAdapterDataSource *dataSource1 = [IGListTestAdapterDataSource new];
+    dataSource1.objects = @[@1, @2, @3];
     IGListAdapter *adapter1 = [[IGListAdapter alloc] initWithUpdater:[IGListAdapterUpdater new] viewController:nil workingRangeSize:0];
     adapter1.collectionView = collectionView;
-    adapter1.dataSource = dataSource;
+    adapter1.dataSource = dataSource1;
+
+    IGListTestAdapterDataSource *dataSource2 = [IGListTestAdapterDataSource new];
+    dataSource2.objects = @[@1, @2, @3];
     IGListAdapter *adapter2 = [[IGListAdapter alloc] initWithUpdater:[IGListAdapterUpdater new] viewController:controller workingRangeSize:2];
     adapter2.collectionView = collectionView;
+    adapter2.dataSource = dataSource2;
+
+    IGListTestAdapterDataSource *dataSource3 = [IGListTestAdapterDataSource new];
+    dataSource3.objects = @[@1, @2, @3];
     IGListAdapter *adapter3 = [[IGListAdapter alloc] initWithUpdater:[IGListAdapterUpdater new] viewController:controller workingRangeSize:2];
     adapter3.collectionView = collectionView;
+    adapter3.dataSource = dataSource3;
+
+    [collectionView setNeedsLayout];
+    [collectionView layoutIfNeeded];
 
     NSArray *descriptions = [IGListDebugger adapterDescriptions];
     XCTAssertEqual(descriptions.count, 3);
