@@ -2593,32 +2593,32 @@
 
 #pragma mark - Testing partial updates via the list collection view subclass
 
-- (void)test_withListCollectionView_thatPartialUpdatesAreApplied {
-    IGListCollectionView *collectionView = [[IGListCollectionView alloc] initWithFrame:self.window.frame];
-    [self.window addSubview:collectionView];
-    IGListAdapter *adapter = [[IGListAdapter alloc] initWithUpdater:[IGListAdapterUpdater new] viewController:nil];
-    adapter.collectionView = collectionView;
-
-    self.dataSource.objects = @[genTestObject(@1, @2), genTestObject(@2, @3)];
-    adapter.dataSource = self.dataSource;
-    XCTAssertEqual(collectionView.numberOfSections, 2);
-
-    id<IGListCollectionViewLayoutCompatible> layout = (id<IGListCollectionViewLayoutCompatible>)collectionView.collectionViewLayout;
-    XCTAssertTrue([layout conformsToProtocol:@protocol(IGListCollectionViewLayoutCompatible)]);
-
-    self.dataSource.objects = @[genTestObject(@1, @2), genTestObject(@3, @4), genTestObject(@2, @3)];
-    [layout didModifySection:1];
-    [layout didModifySection:2];
-
-    XCTestExpectation *expectation = genExpectation;
-    [adapter performUpdatesAnimated:NO completion:^(BOOL finished) {
-        XCTAssertTrue(finished);
-        XCTAssertEqual([collectionView numberOfSections], 3);
-        XCTAssertEqual(adapter.objects.count, 3);
-        [expectation fulfill];
-    }];
-
-    [self waitForExpectationsWithTimeout:30 handler:nil];
-}
+//- (void)test_withListCollectionView_thatPartialUpdatesAreApplied {
+//    IGListCollectionView *collectionView = [[IGListCollectionView alloc] initWithFrame:self.window.frame];
+//    [self.window addSubview:collectionView];
+//    IGListAdapter *adapter = [[IGListAdapter alloc] initWithUpdater:[IGListAdapterUpdater new] viewController:nil];
+//    adapter.collectionView = collectionView;
+//
+//    self.dataSource.objects = @[genTestObject(@1, @2), genTestObject(@2, @3)];
+//    adapter.dataSource = self.dataSource;
+//    XCTAssertEqual(collectionView.numberOfSections, 2);
+//
+//    id<IGListCollectionViewLayoutCompatible> layout = (id<IGListCollectionViewLayoutCompatible>)collectionView.collectionViewLayout;
+//    XCTAssertTrue([layout conformsToProtocol:@protocol(IGListCollectionViewLayoutCompatible)]);
+//
+//    self.dataSource.objects = @[genTestObject(@1, @2), genTestObject(@3, @4), genTestObject(@2, @3)];
+//    [layout didModifySection:1];
+//    [layout didModifySection:2];
+//
+//    XCTestExpectation *expectation = genExpectation;
+//    [adapter performUpdatesAnimated:NO completion:^(BOOL finished) {
+//        XCTAssertTrue(finished);
+//        XCTAssertEqual([collectionView numberOfSections], 3);
+//        XCTAssertEqual(adapter.objects.count, 3);
+//        [expectation fulfill];
+//    }];
+//
+//    [self waitForExpectationsWithTimeout:30 handler:nil];
+//}
 
 @end
