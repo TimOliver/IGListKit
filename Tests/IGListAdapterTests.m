@@ -1667,6 +1667,16 @@
     XCTAssertEqual(size.height, 96);
 }
 
+- (void)test_whenQueryingContainerContentOffset_thatResultIsValid {
+    self.dataSource.objects = @[@2, @3, @4, @5, @6, @7, @8, @9];
+    [self.adapter reloadDataWithCompletion:nil];
+    IGListSectionController *controller = [self.adapter sectionControllerForObject:@4];
+    [self.adapter scrollToSectionController:controller atIndex:0 scrollPosition:UICollectionViewScrollPositionTop   animated:NO];
+    const CGPoint offset = [controller.collectionContext containerContentOffset];
+    XCTAssertEqual(offset.x, 0);
+    XCTAssertEqual(offset.y, 50);
+}
+
 - (void)test_whenInsertingAtBeginning_thatAllSectionControllerIndexesUpdateCorrectly_forInsertAtHead {
     NSNumber *zero = @0;
     NSNumber *one = @1;
