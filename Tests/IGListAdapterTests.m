@@ -1071,6 +1071,7 @@
     self.dataSource.objects = @[@1, @2, @3, @4];
     self.layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     self.collectionView.frame = CGRectMake(0, 0, 300, 10);
+    XCTAssertEqual([self.adapter offsetForFirstVisibleItemWithScrollDirection:UICollectionViewScrollDirectionHorizontal], 0);
     [self.adapter reloadDataWithCompletion:nil];
     XCTAssertEqual([self.collectionView numberOfSections], 4);
     [self.collectionView setContentOffset:CGPointMake(0, 0) animated:NO];
