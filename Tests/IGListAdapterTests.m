@@ -270,7 +270,7 @@
     XCTAssertEqual(self.collectionView.dataSource, adapter1);
 }
 
-- (void)DISABLED_test_whenCellsExtendBeyondBounds_thatVisibleSectionControllersAreLimited {
+- (void)test_whenCellsExtendBeyondBounds_thatVisibleSectionControllersAreLimited {
     // # of items for each object == [item integerValue], so @2 has 2 items (cells)
     self.dataSource.objects = @[@1, @2, @3, @4, @5, @6, @7, @8, @9, @10, @11, @12];
     [self.adapter reloadDataWithCompletion:nil];
@@ -284,7 +284,7 @@
     XCTAssertTrue([visibleSectionControllers containsObject:[self.adapter sectionControllerForObject:@4]]);
 }
 
-- (void) test_withEmptySectionPlusFooter_thatVisibleSectionControllersAreCorrect {
+- (void)test_withEmptySectionPlusFooter_thatVisibleSectionControllersAreCorrect {
     self.dataSource.objects = @[@0];
     [self.adapter reloadDataWithCompletion:nil];
     IGTestSupplementarySource *supplementarySource = [IGTestSupplementarySource new];
@@ -301,7 +301,7 @@
     XCTAssertTrue(visibleSectionControllers.firstObject.supplementaryViewSource == supplementarySource);
 }
 
-- (void)DISABLED_test_whenCellsExtendBeyondBounds_thatVisibleCellsExistForSectionControllers {
+- (void)test_whenCellsExtendBeyondBounds_thatVisibleCellsExistForSectionControllers {
     self.dataSource.objects = @[@2, @3, @4, @5, @6];
     [self.adapter reloadDataWithCompletion:nil];
     id sectionController2 = [self.adapter sectionControllerForObject:@2];
@@ -316,7 +316,7 @@
     XCTAssertEqual([self.adapter visibleCellsForSectionController:sectionController6].count, 0);
 }
 
-- (void)DISABLED_test_whenCellsExtendBeyondBounds_thatVisibleIndexPathsExistForSectionControllers {
+- (void)test_whenCellsExtendBeyondBounds_thatVisibleIndexPathsExistForSectionControllers {
     self.dataSource.objects = @[@2, @3, @4, @5, @6];
     [self.adapter reloadDataWithCompletion:nil];
     id sectionController2 = [self.adapter sectionControllerForObject:@2];
@@ -629,6 +629,18 @@
     XCTAssertEqualObjects(visibleObjects, expectedObjects);
 }
 
+- (void)test_whenAdapterUpdated_withSkipViewSectionControllerMap_fetchingCellIsValid {
+    self.adapter.experiments |= IGListExperimentSkipViewSectionControllerMap;
+    // each section controller returns n items sized 100x10
+    self.dataSource.objects = @[@1, @2, @3, @4, @5, @6];
+    [self.adapter reloadDataWithCompletion:nil];
+    [self.collectionView layoutIfNeeded];
+
+    IGListSectionController *controller = [self.adapter sectionControllerForObject:@2];
+    UICollectionViewCell *cell = [self.adapter cellForItemAtIndex:0 sectionController:controller];
+    XCTAssertNotNil(cell);
+}
+
 - (void)test_whenAdapterUpdated_thatVisibleCellsForObjectAreFound {
     // each section controller returns n items sized 100x10
     self.dataSource.objects = @[@2, @10, @5];
@@ -667,6 +679,32 @@
 
     NSArray *visibleCellsForObject = [self.adapter visibleCellsForObject:@3];
     XCTAssertEqual(visibleCellsForObject.count, 0);
+}
+
+- (void)test_whenAdapterUpdated_thatFullyVisibleCellsIsCorrect {
+    // each section controller returns n items sized 100x10
+    self.dataSource.objects = @[@2, @10, @5];
+    [self.adapter reloadDataWithCompletion:nil];
+    [self.collectionView layoutIfNeeded];
+
+    // each row is 10 pixels high, and the first object has 2 rows.
+    // the window is 100 pixels highm so the number of visible cells in the second section should be 8
+    IGListSectionController *controller = [self.adapter sectionControllerForObject:@10];
+    NSArray *visibleCells = [self.adapter fullyVisibleCellsForSectionController:controller];
+    XCTAssertEqual(visibleCells.count, 8);
+}
+
+- (void)test_whenAdapterUpdated_thatFullyVisibleIndexPathsIsCorrect {
+    // each section controller returns n items sized 100x10
+    self.dataSource.objects = @[@2, @10, @5];
+    [self.adapter reloadDataWithCompletion:nil];
+    [self.collectionView layoutIfNeeded];
+
+    // each row is 10 pixels high, and the first object has 2 rows.
+    // the window is 100 pixels highm so the number of visible cells in the second section should be 8
+    IGListSectionController *controller = [self.adapter sectionControllerForObject:@10];
+    NSArray *visibleCells = [self.adapter visibleIndexPathsForSectionController:controller];
+    XCTAssertEqual(visibleCells.count, 8);
 }
 
 - (void)test_whenScrollVerticallyToItem {
@@ -1483,6 +1521,7 @@
     XCTAssertNotNil(cell);
 
     NSInteger index = [self.adapter indexForCell:cell sectionController:controller];
+    XCTAssertNotEqual(index, NSNotFound);
     XCTAssertEqual(index, 0);
 }
 
@@ -2181,6 +2220,25 @@
 
     [self.adapter performUpdatesAnimated:NO completion:nil];
     XCTAssertNotNil([self.adapter viewForSupplementaryElementOfKind:UICollectionElementKindSectionHeader atIndex:0 sectionController:controller]);
+    XCTAssertNil([self.adapter viewForSupplementaryElementOfKind:UICollectionElementKindSectionHeader atIndex:1 sectionController:controller]);
+}
+
+- (void)test_whenSettingSupplementaryView_withSkipViewSectionControllerMap_thatViewForSupplementaryElementExists {
+    self.adapter.experiments |= IGListExperimentSkipViewSectionControllerMap;
+    self.dataSource.objects = @[@0];
+    [self.adapter reloadDataWithCompletion:nil];
+
+    IGTestSupplementarySource *supplementarySource = [IGTestSupplementarySource new];
+    supplementarySource.collectionContext = self.adapter;
+    supplementarySource.supportedElementKinds = @[UICollectionElementKindSectionHeader];
+
+    IGListSectionController *controller = [self.adapter sectionControllerForObject:@0];
+    controller.supplementaryViewSource = supplementarySource;
+    supplementarySource.sectionController = controller;
+
+    [self.adapter performUpdatesAnimated:NO completion:nil];
+    XCTAssertNotNil([self.adapter viewForSupplementaryElementOfKind:UICollectionElementKindSectionHeader atIndex:0 sectionController:controller]);
+    XCTAssertNil([self.adapter viewForSupplementaryElementOfKind:UICollectionElementKindSectionHeader atIndex:1 sectionController:controller]);
 }
 
 @end
