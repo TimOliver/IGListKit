@@ -819,6 +819,8 @@
     self.layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     [self.adapter reloadDataWithCompletion:nil];
     XCTAssertEqual([self.collectionView numberOfSections], 6);
+    [self.adapter scrollToObject:@1 supplementaryKinds:nil scrollDirection:UICollectionViewScrollDirectionHorizontal scrollPosition:UICollectionViewScrollPositionLeft additionalOffset:0 animated:NO];
+    IGAssertEqualPoint([self.collectionView contentOffset], 0, 0);
     [self.adapter scrollToObject:@1 supplementaryKinds:nil scrollDirection:UICollectionViewScrollDirectionHorizontal scrollPosition:UICollectionViewScrollPositionNone additionalOffset:0 animated:NO];
     IGAssertEqualPoint([self.collectionView contentOffset], 0, 0);
     [self.adapter scrollToObject:@2 supplementaryKinds:nil scrollDirection:UICollectionViewScrollDirectionHorizontal scrollPosition:UICollectionViewScrollPositionNone additionalOffset:0 animated:NO];
