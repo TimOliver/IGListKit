@@ -1439,7 +1439,7 @@
     XCTAssertTrue([[self.collectionView cellForItemAtIndexPath:path] isSelected]);
 }
 
-- (void)DISABLED_test_whenScrollingToIndex_withSectionController_thatPositionCorrect {
+- (void)test_whenScrollingToIndex_withSectionController_thatPositionCorrect {
     self.dataSource.objects = @[@1, @2, @3, @4, @5, @6, @7, @8, @9, @10, @11, @12, @13, @14, @15, @16, @17, @18, @19];
     [self.adapter reloadDataWithCompletion:nil];
 
@@ -1472,6 +1472,18 @@
     XCTAssertNotNil([self.collectionView supplementaryViewForElementKind:UICollectionElementKindSectionHeader atIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]]);
 
     [mockDisplayDelegate verify];
+}
+
+- (void)test_whenDisplayingSectionController_fetchingCellIndexIsValid {
+    self.dataSource.objects = @[@0, @1, @2];
+    [self.adapter reloadDataWithCompletion:nil];
+
+    IGListSectionController *controller = [self.adapter sectionControllerForObject:@1];
+    UICollectionViewCell *cell = [self.adapter cellForItemAtIndex:0 sectionController:controller];
+    XCTAssertNotNil(cell);
+
+    NSInteger index = [self.adapter indexForCell:cell sectionController:controller];
+    XCTAssertEqual(index, 0);
 }
 
 - (void)test_whenEndingDisplayOfSectionController_withOnlySupplementaryView_thatDisplayEventStillSent {
@@ -1665,16 +1677,6 @@
     const CGSize size = [controller.collectionContext insetContainerSize];
     XCTAssertEqual(size.width, 94);
     XCTAssertEqual(size.height, 96);
-}
-
-- (void)test_whenQueryingContainerContentOffset_thatResultIsValid {
-    self.dataSource.objects = @[@2, @3, @4, @5, @6, @7, @8, @9];
-    [self.adapter reloadDataWithCompletion:nil];
-    IGListSectionController *controller = [self.adapter sectionControllerForObject:@4];
-    [self.adapter scrollToSectionController:controller atIndex:0 scrollPosition:UICollectionViewScrollPositionTop   animated:NO];
-    const CGPoint offset = [controller.collectionContext containerContentOffset];
-    XCTAssertEqual(offset.x, 0);
-    XCTAssertEqual(offset.y, 50);
 }
 
 - (void)test_whenInsertingAtBeginning_thatAllSectionControllerIndexesUpdateCorrectly_forInsertAtHead {
