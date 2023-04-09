@@ -397,22 +397,22 @@ typedef struct OffsetRange {
     __weak __typeof__(self) weakSelf = self;
     IGListTransitionDataBlock sectionDataBlock = ^IGListTransitionData *{
         __typeof__(self) strongSelf = weakSelf;
-        if (strongSelf == nil) {
-            return nil;
+        IGListTransitionData *transitionData = nil;
+        if (strongSelf) {
+            NSArray *toObjects = objectsWithDuplicateIdentifiersRemoved([dataSource objectsForListAdapter:strongSelf]);
+            transitionData = [strongSelf _generateTransitionDataWithObjects:toObjects dataSource:dataSource];
         }
-        NSArray *toObjects = objectsWithDuplicateIdentifiersRemoved([dataSource objectsForListAdapter:strongSelf]);
-        return [strongSelf _generateTransitionDataWithObjects:toObjects dataSource:dataSource];
+        return transitionData;
     };
 
     IGListTransitionDataApplyBlock applySectionDataBlock = ^void(IGListTransitionData *data) {
         __typeof__(self) strongSelf = weakSelf;
-        if (strongSelf == nil) {
-            return;
+        if (strongSelf) {
+            // temporarily capture the item map that we are transitioning from in case
+            // there are any item deletes at the same
+            strongSelf.previousSectionMap = [strongSelf.sectionMap copy];
+            [strongSelf _updateWithData:data];
         }
-        // temporarily capture the item map that we are transitioning from in case
-        // there are any item deletes at the same
-        strongSelf.previousSectionMap = [strongSelf.sectionMap copy];
-        [strongSelf _updateWithData:data];
     };
 
     IGListUpdaterCompletion outerCompletionBlock = ^(BOOL finished){
