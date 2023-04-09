@@ -872,17 +872,7 @@ typedef struct OffsetRange {
 
 - (nullable IGListSectionController *)_sectionControllerForCell:(UICollectionViewCell *)cell {
     IGAssertMainThread();
-    if (IGListExperimentEnabled(_experiments, IGListExperimentSkipViewSectionControllerMap)) {
-        NSIndexPath *indexPath = [_collectionView indexPathForCell:cell];
-        if (indexPath != nil) {
-            NSInteger section = indexPath.section;
-            return [self.sectionMap sectionControllerForSection:section];
-        } else {
-            return nil;
-        }
-    } else {
-        return [_viewSectionControllerMap objectForKey:cell];
-    }
+    return [_viewSectionControllerMap objectForKey:cell];
 }
 
 - (void)removeMapForView:(UICollectionReusableView *)view {
