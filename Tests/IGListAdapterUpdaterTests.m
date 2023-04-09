@@ -16,6 +16,7 @@
 #import "IGListMoveIndexInternal.h"
 #import "IGListTestUICollectionViewDataSource.h"
 #import "IGListTransitionData.h"
+#import "IGListUpdateTransactionBuilder.h"
 #import "IGTestObject.h"
 
 #define genExpectation [self expectationWithDescription:NSStringFromSelector(_cmd)]
@@ -1227,6 +1228,23 @@
     }];
     waitExpectation;
     [mockDelegate verify];
+}
+
+#pragma mark - Illegal state checking
+
+- (void)test_whenBlocksAreNotCorrectlyApplied_thatTransactionsGetCancelled {
+    // Test if a nil collection view block is accidentally supplied
+    UICollectionView *(^listCollectionViewBlock)(void) = ^{
+        return self.collectionView;
+    };
+    listCollectionViewBlock = nil;
+
+    IGListAdapterUpdater *updater = [IGListAdapterUpdater new];
+    [updater.transactionBuilder addReloadDataWithCollectionViewBlock:listCollectionViewBlock
+                                                         reloadBlock:^{}
+                                                          completion:nil];
+    [updater update];
+    XCTAssertNil(updater.lastTransactionBuilder);
 }
 
 @end
