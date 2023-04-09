@@ -258,6 +258,29 @@
     XCTAssertEqual([self.collectionView numberOfItemsInSection:1], 2);
 }
 
+- (void)test_whenMovingSections_thatCollectionViewUpdates {
+    self.dataSource.sections = @[
+        [IGSectionObject sectionWithObjects:@[@0, @1]],
+        [IGSectionObject sectionWithObjects:@[@0, @1, @2]]
+    ];
+    [self.updater reloadDataWithCollectionViewBlock:[self collectionViewBlock] reloadUpdateBlock:^{} completion:nil];
+    [self.updater update];
+    XCTAssertEqual([self.collectionView numberOfSections], 2);
+    XCTAssertEqual([self.collectionView numberOfItemsInSection:0], 2);
+    XCTAssertEqual([self.collectionView numberOfItemsInSection:1], 3);
+
+    self.dataSource.sections = @[
+        [IGSectionObject sectionWithObjects:@[@0, @1, @2]],
+        [IGSectionObject sectionWithObjects:@[@0, @1]]
+    ];
+
+    [self.updater moveSectionInCollectionView:self.collectionView fromIndex:0 toIndex:1];
+    [self.updater update];
+    XCTAssertEqual([self.collectionView numberOfSections], 2);
+    XCTAssertEqual([self.collectionView numberOfItemsInSection:0], 3);
+    XCTAssertEqual([self.collectionView numberOfItemsInSection:1], 2);
+}
+
 - (void)test_whenCollectionViewNeedsLayout_thatPerformBatchUpdateWorks {
     NSArray *from = @[
         [IGSectionObject sectionWithObjects:@[]],
