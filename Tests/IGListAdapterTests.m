@@ -1394,14 +1394,20 @@
     self.adapter.collectionViewDelegate = mockCollectionDelegate;
     self.adapter.scrollViewDelegate = mockScrollDelegate;
 
+    id mockSectionControllerScrollDelegate = [OCMockObject mockForProtocol:@protocol(IGListScrollDelegate)];
+    IGListSectionController *firstController = [self.adapter.visibleSectionControllers firstObject];
+    firstController.scrollDelegate = mockSectionControllerScrollDelegate;
+
     [[mockCollectionDelegate reject] scrollViewDidEndDecelerating:self.collectionView];
     [[mockScrollDelegate expect] scrollViewDidEndDecelerating:self.collectionView];
+    [[mockSectionControllerScrollDelegate expect] listAdapter:self.adapter didEndDeceleratingSectionController:firstController];
 
     // simulates the scrollview delegate telling the adapter that it ended decelerating
     [self.adapter scrollViewDidEndDecelerating:self.collectionView];
 
     [mockCollectionDelegate verify];
     [mockScrollDelegate verify];
+    [mockSectionControllerScrollDelegate verify];
 }
 
 - (void)test_whenReloadingObjectsThatDontExist_thatAdapterContinues {
@@ -1651,7 +1657,7 @@
     XCTAssertEqual(inset.right, 4);
 }
 
-- (void)DISABLED_test_whenQueryingInsetContainerSize_thatResultIsBoundsInsetByContent {
+- (void)test_whenQueryingInsetContainerSize_thatResultIsBoundsInsetByContent {
     self.dataSource.objects = @[@2];
     [self.adapter reloadDataWithCompletion:nil];
     self.collectionView.contentInset = UIEdgeInsetsMake(1, 2, 3, 4);
