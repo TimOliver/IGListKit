@@ -474,12 +474,12 @@ typedef struct OffsetRange {
     // use the item map based on whether or not we're in an update block
     IGListSectionMap *map = [self _sectionMapUsingPreviousIfInUpdateBlock:YES];
 
-    for (id object in objects) {
+    [objects enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL *stop) {
         // look up the item using the map's lookup function. might not be the same item
         const NSInteger section = [map sectionForObject:object];
         const BOOL notFound = section == NSNotFound;
         if (notFound) {
-            continue;
+            return;
         }
         [sections addIndex:section];
 
@@ -488,10 +488,11 @@ typedef struct OffsetRange {
             [map updateObject:object];
             [[map sectionControllerForSection:section] didUpdateToObject:object];
         }
-    }
+    }];
 
-    IGAssert(self.collectionView != nil, @"Tried to reload the adapter without a collection view");
-    [self.updater reloadCollectionView:(UICollectionView * _Nonnull)self.collectionView sections:sections];
+    UICollectionView *collectionView = self.collectionView;
+    IGAssert(collectionView != nil, @"Tried to reload the adapter without a collection view");
+    [self.updater reloadCollectionView:collectionView sections:sections];
 }
 
 - (void)addUpdateListener:(id<IGListAdapterUpdateListener>)updateListener {
@@ -689,7 +690,7 @@ typedef struct OffsetRange {
     // for IGListSectionController subclasses after calling [super init]
     IGListSectionControllerPushThread(self.viewController, self);
 
-    for (id object in objects) {
+    [objects enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL *stop) {
         // infra checks to see if a controller exists
         IGListSectionController *sectionController = [map sectionControllerForObject:object];
 
@@ -701,7 +702,7 @@ typedef struct OffsetRange {
         if (sectionController == nil) {
             IGLKLog(@"WARNING: Ignoring nil section controller returned by data source %@ for object %@.",
                     dataSource, object);
-            continue;
+            return;
         }
 
         // in case the section controller was created outside of -listAdapter:sectionControllerForObject:
@@ -710,7 +711,7 @@ typedef struct OffsetRange {
 
         [sectionControllers addObject:sectionController];
         [validObjects addObject:object];
-    }
+    }];
 
 #if DEBUG
     IGAssert([NSSet setWithArray:sectionControllers].count == sectionControllers.count,
