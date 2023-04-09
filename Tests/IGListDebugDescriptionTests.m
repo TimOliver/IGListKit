@@ -22,6 +22,16 @@
 #import "IGListTestCase.h"
 #import "IGListUpdateTransactable.h"
 #import "IGTestDelegateDataSource.h"
+#import "IGTestObject.h"
+
+@interface IGListAdapterUpdater (DebugDescriptionTests)
+- (void)setTransaction:(id<IGListUpdateTransactable>)transaction;
+@end
+
+@interface IGListBindingSectionController (DebugDescriptionTests)
+- (void)setViewModels:(NSArray<id<IGListDiffable>> *)viewModels;
+@end
+
 
 @interface IGListDebugDescriptionTests : IGListTestCase
 
@@ -46,8 +56,11 @@
     [adapter.registeredSupplementaryViewIdentifiers addObject:@"IGSupplementaryViewIdentifier"];
     [adapter.registeredSupplementaryViewNibNames addObject:@"IGSupplementaryNibName"];
 
+    IGListBindingSectionController *bindingSectionController = [[IGListBindingSectionController alloc] init];
+    bindingSectionController.viewModels = @[[[IGTestObject alloc] initWithKey:@"Key" value:@(1)]];
+
     adapter.previousSectionMap = [[IGListSectionMap alloc] initWithMapTable:[NSMapTable strongToStrongObjectsMapTable]];
-    [adapter.previousSectionMap updateWithObjects:@[@1] sectionControllers:@[[[IGListBindingSectionController alloc] init]]];
+    [adapter.previousSectionMap updateWithObjects:@[@1] sectionControllers:@[bindingSectionController]];
 
     XCTAssertTrue(adapter.debugDescriptionLines.count > 0);
     XCTAssertTrue(adapter.debugDescription.length > 0);
@@ -85,12 +98,12 @@
                                                                                  to:[NSIndexPath indexPathForItem:1 inSection:6]];
 
     IGListBatchUpdateData *data = [[IGListBatchUpdateData alloc] initWithInsertSections:insertSections
-                                                                           deleteSections:deleteSections
-                                                                             moveSections:[NSSet setWithObject:moveSections]
-                                                                         insertIndexPaths:@[insertIndexPaths]
-                                                                         deleteIndexPaths:@[deleteIndexPaths]
-                                                                         updateIndexPaths:@[]
-                                                                           moveIndexPaths:@[moveIndexPaths]];
+                                                                         deleteSections:deleteSections
+                                                                           moveSections:[NSSet setWithObject:moveSections]
+                                                                       insertIndexPaths:@[insertIndexPaths]
+                                                                       deleteIndexPaths:@[deleteIndexPaths]
+                                                                       updateIndexPaths:@[]
+                                                                         moveIndexPaths:@[moveIndexPaths]];
 
     XCTAssertTrue(data.debugDescriptionLines.count > 0);
 }
