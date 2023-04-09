@@ -490,10 +490,8 @@ typedef struct OffsetRange {
         }
     }
 
-    UICollectionView *collectionView = self.collectionView;
-    IGAssert(collectionView != nil, @"Tried to reload the adapter without a collection view");
-
-    [self.updater reloadCollectionView:collectionView sections:sections];
+    IGAssert(self.collectionView != nil, @"Tried to reload the adapter without a collection view");
+    [self.updater reloadCollectionView:(UICollectionView * _Nonnull)self.collectionView sections:sections];
 }
 
 - (void)addUpdateListener:(id<IGListAdapterUpdateListener>)updateListener {
