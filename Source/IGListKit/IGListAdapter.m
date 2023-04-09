@@ -244,8 +244,8 @@ typedef struct OffsetRange {
                 case UICollectionViewScrollPositionCenteredHorizontally: {
                     const CGFloat insets = (contentInset.left - contentInset.right) / 2.0;
                     contentOffset.x = offsetMid - collectionViewWidth / 2.0 - insets;
-                    break;
                 }
+                    break;
                 case UICollectionViewScrollPositionLeft:
                 case UICollectionViewScrollPositionNone:
                 case UICollectionViewScrollPositionTop:
