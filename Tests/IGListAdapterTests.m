@@ -140,7 +140,7 @@
     XCTAssertTrue(executed);
 }
 
-- (void)test_whenReloadingEmptyIndexSet_whenInvalidatingLayout_insideBatchUpdateBlock_thatExitsGracefully {
+- (void)test_whenReloadingEmptyIndexSet_whenInvalidatingLayout_insideBatchUpdateBlock_thatOperationExitsGracefully {
     self.dataSource.objects = @[@0, @1, @2];
     [self.adapter performUpdatesAnimated:YES completion:nil];
     IGListSectionController *second = [self.adapter sectionControllerForObject:@1];
