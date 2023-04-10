@@ -12,8 +12,17 @@
 #import "IGLayoutTestDataSource.h"
 #import "IGLayoutTestItem.h"
 #import "IGLayoutTestSection.h"
+#import "IGListAdapter.h"
+#import "IGListAdapterProxy.h"
+#import "IGListAdapterUpdater.h"
 #import "IGListCollectionViewLayoutInternal.h"
 #import "IGListTestHelpers.h"
+
+@interface IGListCollectionViewLayout (Tests)
+
+- (NSString *)_classNameForDelegate:(id<UICollectionViewDelegateFlowLayout>)delegate sectionIndex:(NSInteger)section;
+
+@end
 
 @interface IGListCollectionViewLayoutTests : XCTestCase
 
@@ -1225,23 +1234,28 @@ static const CGRect kTestFrame = (CGRect){{0, 0}, {100, 100}};
     IGAssertEqualFrame([self cellForSection:0 item:2].frame, 40, 0, 20, 20);
 }
 
-#pragma mark - Illegal state validation
+#pragma mark - Internal debugging
 
-- (void)test_whenUpdatingWithInvalidSizes_thatLayoutAssertionFails {
+- (void)test_withDelegateNameDebugger_thatReturnedNamesAreValid {
     [self setUpWithStickyHeaders:NO topInset:0];
 
-    NSArray *items = @[
-        [[IGLayoutTestItem alloc] initWithSize:CGSizeMake(1000, 0)],
-        [[IGLayoutTestItem alloc] initWithSize:CGSizeMake(1000, 0)]
-    ];
+    // Test with the regular delegate
+    XCTAssertTrue([[self.layout _classNameForDelegate:(id)self.collectionView.delegate
+                                         sectionIndex:0]
+                   isEqualToString:@"IGLayoutTestDataSource"]);
 
-    IGLayoutTestSection *testSection = [[IGLayoutTestSection alloc] initWithInsets:UIEdgeInsetsZero
-                                                                       lineSpacing:0
-                                                                  interitemSpacing:0
-                                                                      headerHeight:0
-                                                                      footerHeight:0
-                                                                             items:items];
-    XCTAssertThrows([self prepareWithData:@[testSection]]);
+    // Test with a proxy providing a new adapter
+    IGListAdapter *adapter = [[IGListAdapter alloc] initWithUpdater:[IGListAdapterUpdater new] viewController:nil];
+    IGListAdapterProxy *proxy = [[IGListAdapterProxy alloc] initWithCollectionViewTarget:self.collectionView.delegate
+                                                                        scrollViewTarget:nil
+                                                                             interceptor:adapter];
+    XCTAssertNil([self.layout _classNameForDelegate:(id)proxy sectionIndex:0]);
+
+    // Test with a proxy with an invalid adapter
+    IGListAdapterProxy *invalidProxy = [[IGListAdapterProxy alloc] initWithCollectionViewTarget:self.collectionView.delegate
+                                                                        scrollViewTarget:nil
+                                                                             interceptor:(id)[NSObject new]];
+    XCTAssertNil([self.layout _classNameForDelegate:(id)invalidProxy sectionIndex:0]);
 }
 
 @end
