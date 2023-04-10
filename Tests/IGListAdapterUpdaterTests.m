@@ -1269,7 +1269,7 @@
 
 #pragma mark - Illegal state checking
 
-- (void)test_whenBlocksAreNotCorrectlyApplied_thatTransactionsGetCancelled {
+- (void)test_whenCollectionViewBlockIsNotCorrectlyApplied_thatTransactionsGetCancelled {
     // Test if a nil collection view block is accidentally supplied
     UICollectionView *(^listCollectionViewBlock)(void) = ^{
         return self.collectionView;
@@ -1282,6 +1282,48 @@
                                                           completion:nil];
     [updater update];
     XCTAssertNil(updater.lastTransactionBuilder);
+}
+
+- (void)test_whenReloadBlockIsNotCorrectlyApplied_thatTransactionsGetCancelled {
+    // Test if a nil collection view block is accidentally supplied
+    UICollectionView *(^listCollectionViewBlock)(void) = ^{
+        return self.collectionView;
+    };
+
+    void (^reloadBlock)(void) = ^{};
+    reloadBlock = nil;
+
+    IGListAdapterUpdater *updater = [IGListAdapterUpdater new];
+    [updater.transactionBuilder addReloadDataWithCollectionViewBlock:listCollectionViewBlock
+                                                         reloadBlock:reloadBlock
+                                                          completion:nil];
+    [updater update];
+    XCTAssertNil(updater.lastTransactionBuilder);
+}
+
+- (void)test_whenDataSourceChangeBlockIsNotCorrectlyApplied_thatTransactionsGetCancelled {
+    UICollectionView *(^listCollectionViewBlock)(void) = ^{
+        return self.collectionView;
+    };
+
+    void (^dataSourceChangeBlock)(void) = ^{};
+    dataSourceChangeBlock = nil;
+
+    IGListAdapterUpdater *updater = [IGListAdapterUpdater new];
+    [updater.transactionBuilder addReloadDataWithCollectionViewBlock:listCollectionViewBlock
+                                                         reloadBlock:^{}
+                                                          completion:nil];
+    [updater.transactionBuilder addDataSourceChange:dataSourceChangeBlock];
+    [updater update];
+    XCTAssertNil(updater.lastTransactionBuilder);
+}
+
+- (void)test_whenAddingChangesFromTransactionBuilder_thatOperationExitsGracefully {
+    IGListUpdateTransactionBuilder *builder = [IGListUpdateTransactionBuilder new];
+    builder = nil;
+
+    IGListAdapterUpdater *updater = [IGListAdapterUpdater new];
+    [updater.transactionBuilder addChangesFromBuilder:builder];
 }
 
 @end
