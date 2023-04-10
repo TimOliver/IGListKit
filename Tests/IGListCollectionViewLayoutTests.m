@@ -1272,4 +1272,10 @@ static const CGRect kTestFrame = (CGRect){{0, 0}, {100, 100}};
     XCTAssertNil([self.layout _classNameForDelegate:(id)invalidProxy sectionIndex:0]);
 }
 
+- (void)test_withSupplementalViewAttributes_thatOOBErrorsAreHandled {
+    [self setUpWithStickyHeaders:NO topInset:0];
+    XCTAssertNil([self.layout layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+                                                             atIndexPath:[NSIndexPath indexPathForItem:10 inSection:10]]);
+}
+
 @end
