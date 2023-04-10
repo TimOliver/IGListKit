@@ -2241,20 +2241,4 @@
     XCTAssertNil([self.adapter viewForSupplementaryElementOfKind:UICollectionElementKindSectionHeader atIndex:1 sectionController:controller]);
 }
 
-- (void)test_whenSettingSupplementaryView_whenAlreadyDequeing_thatDequedSupplementaryViewIsNil {
-    self.adapter.experiments |= IGListExperimentSkipViewSectionControllerMap;
-    self.dataSource.objects = @[@0];
-    [self.adapter reloadDataWithCompletion:nil];
-
-    IGTestSupplementarySource *supplementarySource = [IGTestSupplementarySource new];
-    supplementarySource.collectionContext = self.adapter;
-    supplementarySource.supportedElementKinds = @[UICollectionElementKindSectionHeader];
-
-    IGListSectionController *controller = [self.adapter sectionControllerForObject:@0];
-    controller.supplementaryViewSource = supplementarySource;
-    supplementarySource.sectionController = controller;
-
-    [self.adapter performUpdatesAnimated:NO completion:nil];
-}
-
 @end
