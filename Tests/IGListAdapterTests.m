@@ -1607,6 +1607,23 @@
     [mockDelegate verify];
 }
 
+- (void)test_whenEndDisplayingSupplementaryView_withSkipViewSectionControllerMap_thatCollectionViewDelegateReceivesEvents {
+    self.adapter.experiments |= IGListExperimentSkipViewSectionControllerMap;
+
+    // silence display handler asserts
+    self.dataSource.objects = @[@1, @2];
+    [self.adapter reloadDataWithCompletion:nil];
+
+    id mockDelegate = [OCMockObject mockForProtocol:@protocol(UICollectionViewDelegate)];
+    self.adapter.collectionViewDelegate = mockDelegate;
+    UICollectionReusableView *view = [UICollectionReusableView new];
+    NSString *kind = @"kind";
+    NSIndexPath *path = [NSIndexPath indexPathForItem:0 inSection:0];
+    [[mockDelegate expect] collectionView:self.collectionView didEndDisplayingSupplementaryView:view forElementOfKind:kind atIndexPath:path];
+    [self.adapter collectionView:self.collectionView didEndDisplayingSupplementaryView:view forElementOfKind:kind atIndexPath:path];
+    [mockDelegate verify];
+}
+
 - (void)test_whenHighlightingCell_thatCollectionViewDelegateReceivesMethod {
     self.dataSource.objects = @[@0, @1, @2];
     [self.adapter reloadDataWithCompletion:nil];
