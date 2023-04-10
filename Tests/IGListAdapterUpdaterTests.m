@@ -98,6 +98,20 @@
     XCTAssertTrue([self.updater hasChanges]);
 }
 
+- (void)test_whenConvertingIndexPathsToSections_thatCorrectValuesAreReturned {
+    NSArray *indexPaths = @[
+        [NSIndexPath indexPathForItem:0 inSection:0],
+        [NSIndexPath indexPathForItem:0 inSection:1],
+        [NSIndexPath indexPathForItem:0 inSection:2],
+        [NSIndexPath indexPathForItem:0 inSection:3]
+    ];
+
+    NSIndexSet *sections = IGListSectionIndexFromIndexPaths(indexPaths);
+    XCTAssertEqual(sections.count, 4);
+    XCTAssertEqual(sections.firstIndex, 0);
+    XCTAssertEqual(sections.lastIndex, 3);
+}
+
 - (void)test_whenReloadingData_thatCollectionViewUpdates {
     self.dataSource.sections = @[[IGSectionObject sectionWithObjects:@[]]];
     [self.updater reloadDataWithCollectionViewBlock:[self collectionViewBlock] reloadUpdateBlock:^{} completion:nil];
