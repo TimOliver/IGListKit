@@ -103,6 +103,14 @@ static const CGRect kTestFrame = (CGRect){{0, 0}, {100, 100}};
     XCTAssertFalse([self.layout shouldInvalidateLayoutForBoundsChange:self.collectionView.bounds]);
 }
 
+- (void)test_whenApplyingInvalidatedSectionLogic_thatMinimumInvalidatedSectionIsCorrect {
+    [self setUpWithStickyHeaders:YES topInset:0];
+    [self prepareWithData:nil];
+    [self.layout didModifySection:NSNotFound];
+    [self.layout didModifySection:0];
+    [self.layout didModifySection:NSNotFound];
+}
+
 - (void)test_whenEmptyData_thatContentSizeZero {
     [self setUpWithStickyHeaders:YES topInset:0];
 
