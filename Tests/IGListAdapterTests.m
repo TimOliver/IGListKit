@@ -140,6 +140,20 @@
     XCTAssertTrue(executed);
 }
 
+- (void)test_whenReloadingEmptyIndexSet_whenInvalidatingLayout_insideBatchUpdateBlock_thatExitsGracefully {
+    self.dataSource.objects = @[@0, @1, @2];
+    [self.adapter performUpdatesAnimated:YES completion:nil];
+    IGListSectionController *second = [self.adapter sectionControllerForObject:@1];
+
+    __block BOOL executed = NO;
+    [self.adapter performBatchAnimated:YES updates:^(id<IGListBatchContext> batchContext) {
+        [batchContext reloadInSectionController:second atIndexes:[NSIndexSet indexSet]];
+        [batchContext invalidateLayoutInSectionController:second atIndexes:[NSIndexSet indexSet]];
+        executed = YES;
+    } completion:nil];
+    XCTAssertTrue(executed);
+}
+
 - (void)test_whenQueryingReusableIdentifier_thatIdentifierEqualsClassName {
     NSString *identifier = IGListReusableViewIdentifier(UICollectionViewCell.class, nil, nil);
     XCTAssertEqualObjects(identifier, @"UICollectionViewCell");
