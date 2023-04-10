@@ -373,16 +373,13 @@ static void adjustZIndexForAttributes(UICollectionViewLayoutAttributes *attribut
     UICollectionView *collectionView = self.collectionView;
     const UIEdgeInsets contentInset = collectionView.ig_contentInset;
     switch (self.scrollDirection) {
-        case UICollectionViewScrollDirectionVertical: {
-            const CGFloat height = CGRectGetMaxY(section.bounds) + section.insets.bottom;
-            return CGSizeMake(CGRectGetWidth(collectionView.bounds) - contentInset.left - contentInset.right, height);
-        }
-        case UICollectionViewScrollDirectionHorizontal: {
-            const CGFloat width = CGRectGetMaxX(section.bounds) + section.insets.right;
-            return CGSizeMake(width, CGRectGetHeight(collectionView.bounds) - contentInset.top - contentInset.bottom);
-        }
+        case UICollectionViewScrollDirectionVertical:
+            return CGSizeMake(CGRectGetWidth(collectionView.bounds) - contentInset.left - contentInset.right,
+                              CGRectGetMaxY(section.bounds) + section.insets.bottom);
+        case UICollectionViewScrollDirectionHorizontal:
+            return CGSizeMake(CGRectGetMaxX(section.bounds) + section.insets.right,
+                              CGRectGetHeight(collectionView.bounds) - contentInset.top - contentInset.bottom);
     }
-
 }
 
 - (void)invalidateLayoutWithContext:(IGListCollectionViewLayoutInvalidationContext *)context {
