@@ -1324,10 +1324,19 @@
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
     [[mockDelegate expect] collectionView:self.collectionView didSelectItemAtIndexPath:indexPath];
 
-    // simulates the collectionview telling its delegate that it was tapped
+    // simulates the collection view telling its delegate that it was tapped
     [self.adapter collectionView:self.collectionView didSelectItemAtIndexPath:indexPath];
 
     [mockDelegate verify];
+}
+
+- (void)test_whenSelectingCell_thatSelectionConfirmationDelegatesReturnValues {
+    self.dataSource.objects = @[@0, @1, @2];
+    [self.adapter reloadDataWithCompletion:nil];
+
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+    XCTAssertTrue([self.adapter collectionView:self.collectionView shouldSelectItemAtIndexPath:indexPath]);
+    XCTAssertTrue([self.adapter collectionView:self.collectionView shouldDeselectItemAtIndexPath:indexPath]);
 }
 
 - (void)test_whenSelectingCell_thatSectionControllerReceivesMethod {
