@@ -128,16 +128,10 @@ static void adjustZIndexForAttributes(UICollectionViewLayoutAttributes *attribut
     const NSInteger maxZIndexPerSection = 1000;
     const NSInteger baseZIndex = attributes.indexPath.section * maxZIndexPerSection;
 
-    switch (attributes.representedElementCategory) {
-        case UICollectionElementCategoryCell:
-            attributes.zIndex = baseZIndex + attributes.indexPath.item;
-            break;
-        case UICollectionElementCategorySupplementaryView:
-            attributes.zIndex = baseZIndex + maxZIndexPerSection - 1;
-            break;
-        case UICollectionElementCategoryDecorationView:
-            attributes.zIndex = baseZIndex - 1;
-            break;
+    if (attributes.representedElementCategory == UICollectionElementCategoryCell) {
+        attributes.zIndex = baseZIndex + attributes.indexPath.item;
+    } else if (attributes.representedElementCategory == UICollectionElementCategorySupplementaryView) {
+        attributes.zIndex = baseZIndex + maxZIndexPerSection - 1;
     }
 }
 
