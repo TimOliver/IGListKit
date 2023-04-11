@@ -12,6 +12,12 @@
 #import "IGListReloadTransaction.h"
 #import "IGListAdapterUpdater.h"
 
+@interface IGListBatchUpdateTransaction (Tests)
+
+- (NSInteger)mode;
+
+@end
+
 @interface IGListTransactionTests : XCTestCase
 
 @property (nonatomic, strong) UIWindow *window;
@@ -28,6 +34,7 @@
 - (IGListBatchUpdateTransaction *)makeBatchUpdateTransaction {
     IGListUpdateTransactationConfig config;
     memset(&config, 0, sizeof(IGListUpdateTransactationConfig));
+    config.allowsBackgroundDiffing = YES;
     return [[IGListBatchUpdateTransaction alloc] initWithCollectionViewBlock:[self collectionViewBlock]
                                                                      updater:[IGListAdapterUpdater new]
                                                                     delegate:nil
@@ -76,6 +83,20 @@
     IGListBatchUpdateTransaction *batchUpdateTransaction = [self makeBatchUpdateTransaction];
     [batchUpdateTransaction begin];
     XCTAssertEqual(batchUpdateTransaction.state, IGListBatchUpdateStateIdle);
+}
+
+- (void)test_withBatchUpdateTransaction_thatCancellingTransactionBetweenRunLoopsIsCaptured {
+    IGListBatchUpdateTransaction *batchUpdateTransaction = [self makeBatchUpdateTransaction];
+    [batchUpdateTransaction begin];
+    [batchUpdateTransaction cancel];
+
+    XCTestExpectation *expectation = [self expectationWithDescription:NSStringFromSelector(_cmd)];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        XCTAssertEqual(batchUpdateTransaction.mode, 2); // Check mode is cancelled
+        [expectation fulfill];
+    });
+
+    [self waitForExpectationsWithTimeout:30 handler:nil];
 }
 
 - (void)test_withDataSourceChangeTransaction_thatAllStubbedMethodsNoOpCorrectly {
