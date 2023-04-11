@@ -85,6 +85,14 @@
     XCTAssertEqual(batchUpdateTransaction.state, IGListBatchUpdateStateIdle);
 }
 
+- (void)test_withBatchUpdateTransaction_thatCancellingTransactionMultipleTimesPerformsCorrectly {
+    IGListBatchUpdateTransaction *batchUpdateTransaction = [self makeBatchUpdateTransaction];
+    [batchUpdateTransaction begin];
+    [batchUpdateTransaction cancel];
+    [batchUpdateTransaction cancel];
+    XCTAssertEqual(batchUpdateTransaction.mode, 2);
+}
+
 - (void)test_withBatchUpdateTransaction_thatCancellingTransactionBetweenRunLoopsIsCaptured {
     IGListBatchUpdateTransaction *batchUpdateTransaction = [self makeBatchUpdateTransaction];
     [batchUpdateTransaction begin];
@@ -110,6 +118,7 @@
     [transaction insertItemsAtIndexPaths:@[]];
     [transaction deleteItemsAtIndexPaths:@[]];
     [transaction moveItemFromIndexPath:from toIndexPath:to];
+    [transaction reloadItemFromIndexPath:from toIndexPath:to];
     [transaction reloadSections:[NSIndexSet indexSet]];
 }
 
@@ -124,6 +133,7 @@
     [transaction insertItemsAtIndexPaths:@[]];
     [transaction deleteItemsAtIndexPaths:@[]];
     [transaction moveItemFromIndexPath:from toIndexPath:to];
+    [transaction reloadItemFromIndexPath:from toIndexPath:to];
     [transaction reloadSections:[NSIndexSet indexSet]];
 }
 
