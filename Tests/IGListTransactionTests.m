@@ -78,4 +78,32 @@
     XCTAssertEqual(batchUpdateTransaction.state, IGListBatchUpdateStateIdle);
 }
 
+- (void)test_withDataSourceChangeTransaction_thatAllStubbedMethodsNoOpCorrectly {
+    IGListDataSourceChangeTransaction *transaction = [self makeDataSourceChangeTransaction];
+
+    XCTAssertFalse([transaction cancel]);
+
+    NSIndexPath *from = [NSIndexPath indexPathForItem:0 inSection:0];
+    NSIndexPath *to = [NSIndexPath indexPathForItem:0 inSection:1];
+
+    [transaction insertItemsAtIndexPaths:@[]];
+    [transaction deleteItemsAtIndexPaths:@[]];
+    [transaction moveItemFromIndexPath:from toIndexPath:to];
+    [transaction reloadSections:[NSIndexSet indexSet]];
+}
+
+- (void)test_withReloadTransaction_thatAllStubbedMethodsNoOpCorrectly {
+    IGListReloadTransaction *transaction = [self makeReloadTransaction];
+
+    XCTAssertFalse([transaction cancel]);
+
+    NSIndexPath *from = [NSIndexPath indexPathForItem:0 inSection:0];
+    NSIndexPath *to = [NSIndexPath indexPathForItem:0 inSection:1];
+
+    [transaction insertItemsAtIndexPaths:@[]];
+    [transaction deleteItemsAtIndexPaths:@[]];
+    [transaction moveItemFromIndexPath:from toIndexPath:to];
+    [transaction reloadSections:[NSIndexSet indexSet]];
+}
+
 @end
