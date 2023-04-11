@@ -7,14 +7,17 @@
 
 #import <XCTest/XCTest.h>
 
+#import "IGListAdapterUpdater.h"
 #import "IGListBatchUpdateTransaction.h"
 #import "IGListDataSourceChangeTransaction.h"
 #import "IGListReloadTransaction.h"
-#import "IGListAdapterUpdater.h"
+#import "IGListTestUICollectionViewDataSource.h"
+#import "IGListTransitionData.h"
 
 @interface IGListBatchUpdateTransaction (Tests)
 
 - (NSInteger)mode;
+- (void)setSectionData:(IGListTransitionData *)sectionData;
 
 @end
 
@@ -22,6 +25,8 @@
 
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, strong) IGListTestUICollectionViewDataSource *dataSource;
+@property (nonatomic, strong) IGListTransitionDataApplyBlock applySectionDataBlock;
 
 @end
 
@@ -31,17 +36,24 @@
     return ^UICollectionView *{ return self.collectionView; };
 }
 
+- (IGListTransitionDataBlock)dataBlockFromObjects:(NSArray *)fromObjects toObjects:(NSArray *)toObjects {
+    return ^IGListTransitionData *{
+        return [[IGListTransitionData alloc] initFromObjects:fromObjects toObjects:toObjects toSectionControllers:@[]];
+    };
+}
+
 - (IGListBatchUpdateTransaction *)makeBatchUpdateTransaction {
     IGListUpdateTransactationConfig config;
     memset(&config, 0, sizeof(IGListUpdateTransactationConfig));
     config.allowsBackgroundDiffing = YES;
+    config.singleItemSectionUpdates = YES;
     return [[IGListBatchUpdateTransaction alloc] initWithCollectionViewBlock:[self collectionViewBlock]
                                                                      updater:[IGListAdapterUpdater new]
                                                                     delegate:nil
                                                                       config:config
                                                                     animated:NO
-                                                            sectionDataBlock:nil
-                                                       applySectionDataBlock:nil
+                                                            sectionDataBlock:[self dataBlockFromObjects:@[] toObjects:@[@0]]
+                                                       applySectionDataBlock:self.applySectionDataBlock
                                                             itemUpdateBlocks:@[]
                                                             completionBlocks:@[]];
 }
@@ -68,8 +80,13 @@
 
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     self.collectionView = [[UICollectionView alloc] initWithFrame:self.window.frame collectionViewLayout:layout];
-
     [self.window addSubview:self.collectionView];
+
+    self.dataSource = [[IGListTestUICollectionViewDataSource alloc] initWithCollectionView:self.collectionView];
+    __weak __typeof__(self) weakSelf = self;
+    self.applySectionDataBlock = ^(IGListTransitionData *data) {
+        weakSelf.dataSource.sections = data.toObjects;
+    };
 }
 
 - (void)tearDown {
@@ -91,6 +108,13 @@
     [batchUpdateTransaction cancel];
     [batchUpdateTransaction cancel];
     XCTAssertEqual(batchUpdateTransaction.mode, 2);
+}
+
+- (void)test_withBatchUpdateTransaction_thatMismatchedCollectionViewStateIsCaught {
+    self.dataSource.sections = @[[IGSectionObject sectionWithObjects:@[]]];
+    IGListBatchUpdateTransaction *batchUpdateTransaction = [self makeBatchUpdateTransaction];
+    [batchUpdateTransaction begin];
+    XCTAssertThrows([self.collectionView deleteSections:[NSIndexSet indexSetWithIndex:0]]);
 }
 
 - (void)test_withBatchUpdateTransaction_thatCancellingTransactionBetweenRunLoopsIsCaptured {
