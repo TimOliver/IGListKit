@@ -1267,6 +1267,31 @@
     [mockDelegate verify];
 }
 
+- (void)test_withSingleItemSectionUpdates_thatPerformBatchUpdateWorks {
+    self.updater.singleItemSectionUpdates = YES;
+
+    IGSectionObject *first = [IGSectionObject sectionWithObjects:@[@1, @2, @3]];
+    IGSectionObject *second =[IGSectionObject sectionWithObjects:@[@4, @5, @6]];
+
+    NSArray *from = @[first, second];
+    NSArray *to = @[second, first];
+
+    self.dataSource.sections = from;
+    [self.updater reloadDataWithCollectionViewBlock:[self collectionViewBlock] reloadUpdateBlock:^{} completion:nil];
+    [self.updater update];
+
+    XCTestExpectation *expectation = genExpectation;
+    [self.updater performUpdateWithCollectionViewBlock:[self collectionViewBlock]
+                                              animated:NO
+                                      sectionDataBlock:[self dataBlockFromObjects:from toObjects:to]
+                                 applySectionDataBlock:self.applySectionDataBlock
+                                            completion:^(BOOL finished) {
+        XCTAssertEqual([self.collectionView numberOfSections], 2);
+        [expectation fulfill];
+    }];
+    [self waitForExpectationsWithTimeout:30 handler:nil];
+}
+
 #pragma mark - Illegal state checking
 
 - (void)test_whenCollectionViewBlockIsNotCorrectlyApplied_thatTransactionsGetCancelled {
