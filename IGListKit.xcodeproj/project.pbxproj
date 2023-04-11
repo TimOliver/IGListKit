@@ -425,6 +425,7 @@
 		E56B7B3420A9D7100071010C /* IGListCollectionScrollingTraitsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E56B7B3320A9D7100071010C /* IGListCollectionScrollingTraitsTests.m */; };
 		E56B7B3520A9D7100071010C /* IGListCollectionScrollingTraitsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E56B7B3320A9D7100071010C /* IGListCollectionScrollingTraitsTests.m */; };
 		E8D312E01FC472A60009FA2F /* IGListContentInsetTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8D312DF1FC472A60009FA2F /* IGListContentInsetTests.m */; };
+		F14ED13E29E4E70800F46890 /* IGListTransactionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F14ED13D29E4E70800F46890 /* IGListTransactionTests.m */; };
 		F1855A4C29BC565600558D18 /* IGListDiffDescriptionStringTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F1855A4B29BC565600558D18 /* IGListDiffDescriptionStringTests.m */; };
 		F1855A4D29BC565600558D18 /* IGListDiffDescriptionStringTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F1855A4B29BC565600558D18 /* IGListDiffDescriptionStringTests.m */; };
 		F1855A4E29BC565600558D18 /* IGListDiffDescriptionStringTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F1855A4B29BC565600558D18 /* IGListDiffDescriptionStringTests.m */; };
@@ -741,6 +742,7 @@
 		E56B7B3320A9D7100071010C /* IGListCollectionScrollingTraitsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGListCollectionScrollingTraitsTests.m; sourceTree = "<group>"; };
 		E8D312DF1FC472A60009FA2F /* IGListContentInsetTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IGListContentInsetTests.m; sourceTree = "<group>"; };
 		E980179F5E885E417EB20D55 /* Pods_IGListKit_tvOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IGListKit_tvOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F14ED13D29E4E70800F46890 /* IGListTransactionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGListTransactionTests.m; sourceTree = "<group>"; };
 		F1855A4B29BC565600558D18 /* IGListDiffDescriptionStringTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGListDiffDescriptionStringTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1169,6 +1171,7 @@
 				29DA5CA91EA7D39B00113926 /* IGListTestCase.h */,
 				29DA5CA61EA7D37000113926 /* IGListTestCase.m */,
 				29DA5CAA1EA7D3FF00113926 /* IGListTestHelpers.h */,
+				F14ED13D29E4E70800F46890 /* IGListTransactionTests.m */,
 				88144EEF1D870EDC007C7F66 /* IGListWorkingRangeHandlerTests.m */,
 				2997D4961DF5FC0B005A5DD2 /* IGReloadDataUpdaterTests.m */,
 				887D0B571D870E1E009E01F7 /* Info.plist */,
@@ -2156,6 +2159,7 @@
 				821BC4CB1DB8D60100172ED0 /* IGTestStoryboardViewController.m in Sources */,
 				821BC4D01DB8D90900172ED0 /* IGTestStoryboardCell.m in Sources */,
 				88144F161D870EDC007C7F66 /* IGListTestUICollectionViewDataSource.m in Sources */,
+				F14ED13E29E4E70800F46890 /* IGListTransactionTests.m in Sources */,
 				88144F091D870EDC007C7F66 /* IGListAdapterUpdaterTests.m in Sources */,
 				29C4748C1DDF45F400AE68CE /* IGListAdapterProxyTests.m in Sources */,
 				8240C7F81DC2F3FB00B3AAE7 /* IGListTestStoryboardSection.m in Sources */,
