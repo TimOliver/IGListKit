@@ -21,7 +21,9 @@
 
 @end
 
-@interface IGListTransactionTests : XCTestCase
+@interface IGListTransactionTests : XCTestCase {
+    IGListUpdateTransactationConfig _config;
+}
 
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -43,14 +45,10 @@
 }
 
 - (IGListBatchUpdateTransaction *)makeBatchUpdateTransaction {
-    IGListUpdateTransactationConfig config;
-    memset(&config, 0, sizeof(IGListUpdateTransactationConfig));
-    config.allowsBackgroundDiffing = YES;
-    config.singleItemSectionUpdates = YES;
     return [[IGListBatchUpdateTransaction alloc] initWithCollectionViewBlock:[self collectionViewBlock]
                                                                      updater:[IGListAdapterUpdater new]
                                                                     delegate:nil
-                                                                      config:config
+                                                                      config:_config
                                                                     animated:NO
                                                             sectionDataBlock:[self dataBlockFromObjects:@[] toObjects:@[@0]]
                                                        applySectionDataBlock:self.applySectionDataBlock
@@ -87,12 +85,16 @@
     self.applySectionDataBlock = ^(IGListTransitionData *data) {
         weakSelf.dataSource.sections = data.toObjects;
     };
+
+    memset(&_config, 0, sizeof(IGListUpdateTransactationConfig));
 }
 
 - (void)tearDown {
     [super tearDown];
-
     self.collectionView = nil;
+    self.dataSource = nil;
+    self.window = nil;
+    memset(&_config, 0, sizeof(IGListUpdateTransactationConfig));
 }
 
 - (void)test_withBatchUpdateTransaction_thatNilCollectionViewBailsCorrectly {
@@ -103,6 +105,7 @@
 }
 
 - (void)test_withBatchUpdateTransaction_thatCancellingTransactionMultipleTimesPerformsCorrectly {
+    _config.allowsBackgroundDiffing = YES;
     IGListBatchUpdateTransaction *batchUpdateTransaction = [self makeBatchUpdateTransaction];
     [batchUpdateTransaction begin];
     [batchUpdateTransaction cancel];
@@ -113,11 +116,11 @@
 - (void)test_withBatchUpdateTransaction_thatMismatchedCollectionViewStateIsCaught {
     self.dataSource.sections = @[[IGSectionObject sectionWithObjects:@[]]];
     IGListBatchUpdateTransaction *batchUpdateTransaction = [self makeBatchUpdateTransaction];
-    [batchUpdateTransaction begin];
-    XCTAssertThrows([self.collectionView deleteSections:[NSIndexSet indexSetWithIndex:0]]);
+    XCTAssertThrows([batchUpdateTransaction begin]);
 }
 
 - (void)test_withBatchUpdateTransaction_thatCancellingTransactionBetweenRunLoopsIsCaptured {
+    _config.allowsBackgroundDiffing = YES;
     IGListBatchUpdateTransaction *batchUpdateTransaction = [self makeBatchUpdateTransaction];
     [batchUpdateTransaction begin];
     [batchUpdateTransaction cancel];
