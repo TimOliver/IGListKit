@@ -70,10 +70,8 @@ static void * kIGListAdapterKey = &kIGListAdapterKey;
     NSIndexPath *updatedTarget = [self updatedTargetForInteractivelyMovingItem:previousIndexPath
                                                                    toIndexPath:originalTarget
                                                                        adapter:adapter];
-    if (updatedTarget) {
-        return updatedTarget;
-    }
-    return originalTarget;
+
+    return updatedTarget ?: originalTarget;
 }
 
 - (nullable NSIndexPath *)updatedTargetForInteractivelyMovingItem:(NSIndexPath *)previousIndexPath
