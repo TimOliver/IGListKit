@@ -7,10 +7,20 @@
 
 #import <XCTest/XCTest.h>
 
+#import <OCMock/OCMock.h>
+
 #import "IGTestObject.h"
 #import "IGListTestCase.h"
 #import "IGTestDelegateDataSource.h"
 #import "UICollectionViewLayout+InteractiveReordering.h"
+
+@interface UICollectionViewLayout (Tests)
+
+- (void)ig_invalidateAccessoryElementsWithSupplementaryIndexPaths:(NSDictionary<NSString *, NSArray<NSIndexPath *> *> *)supplementaryIndexPaths
+                                             decorationIndexPaths:(NSDictionary<NSString *, NSArray<NSIndexPath *> *> *)decorationIndexPaths
+                                                        inContext:(UICollectionViewLayoutInvalidationContext *)context;
+
+@end
 
 @interface IGListInteractiveMovingTests : IGListTestCase
 
@@ -99,6 +109,22 @@
                                                                                                                       previousIndexPaths:@[targetIndexPath]
                                                                                                                        movementCancelled:NO];
     XCTAssertTrue(context.invalidatedItemIndexPaths.count == 0);
+}
+
+- (void)test_withInvalidationContext_thatSupplementaryAndDecorationIndexPathsAreInvalidated {
+    UICollectionViewLayout *layout = [UICollectionViewLayout new];
+
+    NSDictionary *supplementaryDictionary = @{@"supplementary": @[[NSIndexPath indexPathForItem:1 inSection:1]]};
+    NSDictionary *decorationDictionary = @{@"decoration": @[[NSIndexPath indexPathForItem:2 inSection:2]]};
+
+    id contextMock = [OCMockObject mockForClass:[UICollectionViewLayoutInvalidationContext class]];
+    [[contextMock expect] invalidateSupplementaryElementsOfKind:@"supplementary" atIndexPaths:supplementaryDictionary[@"supplementary"]];
+    [[contextMock expect] invalidateDecorationElementsOfKind:@"decoration" atIndexPaths:decorationDictionary[@"decoration"]];
+
+    [layout ig_invalidateAccessoryElementsWithSupplementaryIndexPaths:supplementaryDictionary
+                                                 decorationIndexPaths:decorationDictionary
+                                                            inContext:contextMock];
+    [contextMock verify];
 }
 
 @end

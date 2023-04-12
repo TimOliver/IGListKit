@@ -175,12 +175,9 @@ static void * kIGListAdapterKey = &kIGListAdapterKey;
             }
 
             [modifiedContext invalidateItemsAtIndexPaths:invalidatedItemIndexPaths];
-            [originalContext.invalidatedSupplementaryIndexPaths enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSArray<NSIndexPath *> * _Nonnull obj, BOOL * _Nonnull stop) {
-                [modifiedContext invalidateSupplementaryElementsOfKind:key atIndexPaths:obj];
-            }];
-            [originalContext.invalidatedDecorationIndexPaths enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSArray<NSIndexPath *> * _Nonnull obj, BOOL * _Nonnull stop) {
-                [modifiedContext invalidateDecorationElementsOfKind:key atIndexPaths:obj];
-            }];
+            [self ig_invalidateAccessoryElementsWithSupplementaryIndexPaths:originalContext.invalidatedSupplementaryIndexPaths
+                                                       decorationIndexPaths:originalContext.invalidatedDecorationIndexPaths
+                                                                  inContext:modifiedContext];
             modifiedContext.contentOffsetAdjustment = originalContext.contentOffsetAdjustment;
             modifiedContext.contentSizeAdjustment = originalContext.contentSizeAdjustment;
 
@@ -188,6 +185,17 @@ static void * kIGListAdapterKey = &kIGListAdapterKey;
         }
     }
     return originalContext;
+}
+
+- (void)ig_invalidateAccessoryElementsWithSupplementaryIndexPaths:(NSDictionary<NSString *, NSArray<NSIndexPath *> *> *)supplementaryIndexPaths
+                                             decorationIndexPaths:(NSDictionary<NSString *, NSArray<NSIndexPath *> *> *)decorationIndexPaths
+                                                        inContext:(UICollectionViewLayoutInvalidationContext *)context {
+    [supplementaryIndexPaths enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSArray<NSIndexPath *> *obj, BOOL *stop) {
+        [context invalidateSupplementaryElementsOfKind:key atIndexPaths:obj];
+    }];
+    [decorationIndexPaths enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSArray<NSIndexPath *> *obj, BOOL *stop) {
+        [context invalidateDecorationElementsOfKind:key atIndexPaths:obj];
+    }];
 }
 
 @end
