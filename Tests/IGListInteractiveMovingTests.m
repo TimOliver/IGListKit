@@ -33,6 +33,17 @@
     XCTAssertEqual(indexPath.section, targetIndexPath.section);
 }
 
+- (void)test_withDetachedLayout_thatCleanupInvalidationContextExitsEarly {
+    UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
+    NSIndexPath *sourceIndexPath = [NSIndexPath indexPathForItem:1 inSection:1];
+    NSIndexPath *targetIndexPath = [NSIndexPath indexPathForItem:1 inSection:1];
+    UICollectionViewLayoutInvalidationContext *context = [layout invalidationContextForInteractivelyMovingItems:@[targetIndexPath]
+                                                                                             withTargetPosition:CGPointMake(0, 0)
+                                                                                             previousIndexPaths:@[sourceIndexPath]
+                                                                                               previousPosition:CGPointZero];
+    XCTAssertTrue(context.invalidatedItemIndexPaths.count > 0);
+}
+
 - (void)test_whenCollectionViewIsSet_thatTargetIndexPathIsValid {
     [self setupWithObjects:@[genTestObject(@1, @2)]];
     UICollectionViewLayout *layout = self.collectionView.collectionViewLayout;
@@ -43,14 +54,51 @@
     XCTAssertEqual(indexPath.section, targetIndexPath.section);
 }
 
-- (void)test_whenSettingUpTest_thenCollectionViewIsLoaded {
-    [self setupWithObjects:@[genTestObject(@1, @2)]];
+- (void)test_whenCollectionViewIsSet_thatInvalidationContextForInteractivelyMovingItemsPasses {
+    [self setupWithObjects:@[genTestObject(@1, @2), genTestObject(@4, @5)]];
     UICollectionViewLayout *layout = self.collectionView.collectionViewLayout;
-    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:1 inSection:1];
-    NSIndexPath *targetIndexPath = [layout targetIndexPathForInteractivelyMovingItem:indexPath
-                                                                        withPosition:CGPointMake(100, 100)];
-    XCTAssertEqual(indexPath.item, targetIndexPath.item);
-    XCTAssertEqual(indexPath.section, targetIndexPath.section);
+    NSIndexPath *sourceIndexPath = [NSIndexPath indexPathForItem:1 inSection:1];
+    NSIndexPath *targetIndexPath = [NSIndexPath indexPathForItem:1 inSection:1];
+    UICollectionViewLayoutInvalidationContext *context = [layout invalidationContextForInteractivelyMovingItems:@[targetIndexPath]
+                                                                                             withTargetPosition:CGPointMake(0, 0)
+                                                                                             previousIndexPaths:@[sourceIndexPath]
+                                                                                               previousPosition:CGPointZero];
+    XCTAssertTrue(context.invalidatedItemIndexPaths.count > 0);
+}
+
+- (void)test_whenCollectionViewIsSet_andIndexPathIsInsideBounds_thatValidationContextForEndingInteractiveMovementOfItemsToFinalIndexPathsPasses {
+    [self setupWithObjects:@[genTestObject(@1, @2), genTestObject(@4, @5), genTestObject(@6, @7)]];
+    UICollectionViewLayout *layout = self.collectionView.collectionViewLayout;
+    NSIndexPath *sourceIndexPath = [NSIndexPath indexPathForItem:1 inSection:0];
+    NSIndexPath *targetIndexPath = [NSIndexPath indexPathForItem:1 inSection:0];
+    UICollectionViewLayoutInvalidationContext *context = [layout invalidationContextForEndingInteractiveMovementOfItemsToFinalIndexPaths:@[sourceIndexPath]
+                                                                                                                      previousIndexPaths:@[targetIndexPath]
+                                                                                                                       movementCancelled:NO];
+    XCTAssertTrue(context.invalidatedItemIndexPaths.count > 0);
+}
+
+- (void)test_whenCollectionViewIsSet_andIndexPathIsOutOfBounds_thatValidationContextForEndingInteractiveMovementOfItemsToFinalIndexPathsPasses {
+    [self setupWithObjects:@[genTestObject(@1, @2), genTestObject(@4, @5), genTestObject(@6, @7)]];
+    UICollectionViewLayout *layout = self.collectionView.collectionViewLayout;
+    NSIndexPath *sourceIndexPath = [NSIndexPath indexPathForItem:8 inSection:2];
+    NSIndexPath *targetIndexPath = [NSIndexPath indexPathForItem:8 inSection:2];
+    UICollectionViewLayoutInvalidationContext *context = [layout invalidationContextForEndingInteractiveMovementOfItemsToFinalIndexPaths:@[sourceIndexPath]
+                                                                                                                      previousIndexPaths:@[targetIndexPath]
+                                                                                                                       movementCancelled:NO];
+    XCTAssertTrue(context.invalidatedItemIndexPaths.count == 0);
+}
+
+- (void)test_whenCollectionViewIsSetWithBaseLayout_andIndexPathIsOutOfBounds_thatValidationContextForEndingInteractiveMovementOfItemsToFinalIndexPathsPasses {
+    [self setupWithObjects:@[genTestObject(@1, @2), genTestObject(@4, @5), genTestObject(@6, @7)]];
+    UICollectionViewLayout *layout = [UICollectionViewLayout new];
+    [layout ig_hijackLayoutInteractiveReorderingMethodForAdapter:self.adapter];
+    self.collectionView.collectionViewLayout = layout;
+    NSIndexPath *sourceIndexPath = [NSIndexPath indexPathForItem:8 inSection:2];
+    NSIndexPath *targetIndexPath = [NSIndexPath indexPathForItem:8 inSection:2];
+    UICollectionViewLayoutInvalidationContext *context = [layout invalidationContextForEndingInteractiveMovementOfItemsToFinalIndexPaths:@[sourceIndexPath]
+                                                                                                                      previousIndexPaths:@[targetIndexPath]
+                                                                                                                       movementCancelled:NO];
+    XCTAssertTrue(context.invalidatedItemIndexPaths.count == 0);
 }
 
 @end
