@@ -5,5 +5,5 @@ workspace: IGListKit.xcworkspace
 scheme: IGListKit
 source_directory: Source
 ignore:
-  - "../**/*/Xcode*"
-  - "Tests"
+  - ../**/*/Xcode*
+  - Tests/*
