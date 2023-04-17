@@ -116,7 +116,11 @@
 - (void)test_withBatchUpdateTransaction_thatMismatchedCollectionViewStateIsCaught {
     self.dataSource.sections = @[[IGSectionObject sectionWithObjects:@[]]];
     IGListBatchUpdateTransaction *batchUpdateTransaction = [self makeBatchUpdateTransaction];
+#if !defined(NS_BLOCK_ASSERTIONS) || !defined(BUCK_BUILD)
     XCTAssertThrows([batchUpdateTransaction begin]);
+#else
+    [batchUpdateTransaction begin];
+#endif
 }
 
 - (void)test_withBatchUpdateTransaction_thatCancellingTransactionBetweenRunLoopsIsCaptured {
