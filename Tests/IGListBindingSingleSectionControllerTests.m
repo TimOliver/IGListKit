@@ -11,8 +11,8 @@
 #import "IGListTestCase.h"
 #import "IGListAdapterInternal.h"
 #import "IGTestCell.h"
+#import "IGListBindingSingleSectionController.h"
 #import "IGTestBindingSingleItemDataSource.h"
-
 
 @interface IGListBindingSingleSectionControllerTests : IGListTestCase
 
@@ -24,6 +24,30 @@
     self.dataSource = [IGTestBindingSingleItemDataSource new];
     self.frame = CGRectMake(0, 0, 100, 1000);
     [super setUp];
+}
+
+- (void)test_withDefaultClass_thatCellOverrideMethodsFallThroughCorrectly {
+    IGListBindingSingleSectionController *controller = [IGListBindingSingleSectionController new];
+
+    id<IGListDiffable> viewModel = genTestObject(@1, @"Foo");
+
+    UICollectionViewCell *cell = [UICollectionViewCell new];
+    XCTAssertNoThrow([controller didSelectItemWithCell:cell]);
+    XCTAssertNoThrow([controller didDeselectItemWithCell:cell]);
+    XCTAssertNoThrow([controller didHighlightItemWithCell:cell]);
+    XCTAssertNoThrow([controller didUnhighlightItemWithCell:cell]);
+
+    @try {
+        [controller cellClass];
+    } @catch (NSException *e) {}
+
+    @try {
+        [controller configureCell:cell withViewModel:viewModel];
+    } @catch (NSException *e) {}
+
+    @try {
+        [controller sizeForViewModel:viewModel];
+    } @catch (NSException *e) {}
 }
 
 - (void)test_whenSetupWithObjects_collectionViewHasSections {
@@ -81,6 +105,7 @@
                              ]];
     UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
     XCTAssertTrue([cell isKindOfClass:[IGTestCell class]]);
+
 }
 
 - (void)test_whenDidSelectIsCalled_subclassIsCalled {
@@ -90,6 +115,10 @@
     IGListSectionController *controller = [self.adapter sectionControllerForSection:0];
     [controller didSelectItemAtIndex:0];
     IGTestCell *cell1 = (IGTestCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
+
+    // Check the cell is being displayed
+    IGListBindingSingleSectionController *singleSectionController = (IGListBindingSingleSectionController *)controller;
+    XCTAssertTrue([singleSectionController isDisplayingCell]);
 
     // Check the cell label is updated in `IGTestBindingSingleSectionController`
     XCTAssertEqualObjects(cell1.label.text, @"did-select");
