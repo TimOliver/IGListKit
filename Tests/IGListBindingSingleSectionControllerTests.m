@@ -81,6 +81,35 @@
     XCTAssertEqual(cell3.frame.size.width, 100);
 }
 
+- (void)test_whenSetupWithObjects_scrollingIsPerformedCorrectly {
+    [self setupWithObjects:@[
+                             genTestObject(@1, @"Foo"),
+                             genTestObject(@2, @"Bar"),
+                             genTestObject(@3, @"Baz"),
+                             ]];
+    IGTestCell *cell1 = (IGTestCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
+    IGTestCell *cell2 = (IGTestCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:1]];
+    IGTestCell *cell3 = (IGTestCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:2]];
+
+    // Check that all 3 cells are valid
+    XCTAssertNotNil(cell1);
+    XCTAssertNotNil(cell2);
+    XCTAssertNotNil(cell3);
+
+    // Scroll the collection view enough for the first cell to be out of bounds
+    self.collectionView.contentOffset = (CGPoint){0, 45};
+    [self.collectionView layoutIfNeeded];
+
+    cell1 = (IGTestCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
+    cell2 = (IGTestCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:1]];
+    cell3 = (IGTestCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:2]];
+
+    // Check that all cells except the first are valid
+    XCTAssertNil(cell1);
+    XCTAssertNotNil(cell2);
+    XCTAssertNotNil(cell3);
+}
+
 - (void)test_whenSetupWithObjects_cellsAreConfigured {
     [self setupWithObjects:@[
                              genTestObject(@1, @"Foo"),
@@ -105,7 +134,41 @@
                              ]];
     UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
     XCTAssertTrue([cell isKindOfClass:[IGTestCell class]]);
+}
 
+- (void)test_whenSetupWithObjects_andReloadingObjects_diffingBehaviorIsExpected {
+    // Set up with an initial data set
+    [self setupWithObjects:@[genTestObject(@1, @"Foo")]];
+
+    IGTestCell *cell = (IGTestCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
+    XCTAssertEqualObjects(cell.label.text, @"Foo");
+
+    // Create a dispatch group so we can force the async reloads to happen serially
+    XCTestExpectation *expectation1 = genExpectation;
+
+    // Regenerate a new copy of the original data set
+    self.dataSource.objects = @[genTestObject(@1, @"Foo")];
+    [self.adapter performUpdatesAnimated:NO completion:^(BOOL finished) {
+        [expectation1 fulfill];
+    }];
+
+    [self waitForExpectations:@[expectation1] timeout:30];
+
+    IGTestCell *reloadedCell = (IGTestCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
+    XCTAssertEqualObjects(reloadedCell.label.text, @"Foo");
+
+    XCTestExpectation *expectation2 = genExpectation;
+
+    // Set a data set with new values
+    self.dataSource.objects = @[genTestObject(@1, @"Bar")];
+    [self.adapter performUpdatesAnimated:NO completion:^(BOOL finished) {
+        [expectation2 fulfill];
+    }];
+
+    [self waitForExpectations:@[expectation2] timeout:30];
+
+    IGTestCell *modifiedCell = (IGTestCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
+    XCTAssertEqualObjects(modifiedCell.label.text, @"Bar");
 }
 
 - (void)test_whenDidSelectIsCalled_subclassIsCalled {
