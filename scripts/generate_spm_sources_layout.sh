@@ -114,7 +114,6 @@ function generate_ig_list_kit_spm_public_headers() {
 
     public_headers_list=$(
         find "Source/IGListKit" \
-        \! -name "IGListBindingSingleSectionController.[hm]" \
         -name "*.[h]" \
         -type f -not -path "spm/*" \
         -not -path "Source/IGListKit/Internal/*" \
