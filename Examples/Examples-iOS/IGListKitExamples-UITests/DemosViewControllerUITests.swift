@@ -82,6 +82,7 @@ final class DemosViewControllerUITests: UITestCase {
     }
 
     private func enterAndAssertScreen(withTitle title: String) {
+        XCUIApplication().activate()
         let elem = XCUIApplication().collectionViews.cells.staticTexts[title]
 
         var numberOfTries = 0
