@@ -223,6 +223,12 @@ jobs:
       - name: Install ruby gems.
         run: bundle install
 
+      - name: Preboot iOS Simulator
+        uses: futureware-tech/simulator-action@v2
+        with:
+          model: 'iPhone 15 Pro'
+          os_version: '>=17.0'
+
       - name: Build iOS Example - ${{ matrix.iosDestination }}
         run: |
           set -o pipefail
