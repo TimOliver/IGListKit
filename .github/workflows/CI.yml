@@ -227,27 +227,26 @@ jobs:
         run: |
           set -o pipefail
           xcodebuild build build-for-testing -project "${{ env.IOS_EXAMPLE_XCODEPROJ }}" -scheme "${{ env.EXAMPLE_SCHEME }}" -destination "${{ matrix.iosDestination }}" -configuration Debug ONLY_ACTIVE_ARCH=YES CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c
-          xcodebuild analyze test-without-building -project "${{ env.IOS_EXAMPLE_XCODEPROJ }}" -scheme "${{ env.EXAMPLE_SCHEME }}" -destination "${{ matrix.iosDestination }}" -configuration Debug ONLY_ACTIVE_ARCH=YES CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c
 
       - name: Run iOS Example's UI Tests - ${{ matrix.iosDestination }}
         run: |
           set -o pipefail
-          xcodebuild build test -project "${{ env.IOS_EXAMPLE_XCODEPROJ }}" -scheme "${{ env.EXAMPLE_SCHEME }}" -destination "${{ matrix.iosDestination }}" -configuration Debug ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c
+          xcodebuild analyze test-without-building -project "${{ env.IOS_EXAMPLE_XCODEPROJ }}" -scheme "${{ env.EXAMPLE_SCHEME }}" -destination "${{ matrix.iosDestination }}" -configuration Debug ONLY_ACTIVE_ARCH=YES CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c
 
       - name: Build tvOS Example - ${{ matrix.tvOSDestination }}
         run: |
           set -o pipefail
-          xcodebuild build -project "${{ env.TVOS_EXAMPLE_XCODEPROJ }}" -scheme "${{ env.EXAMPLE_SCHEME }}" -destination "${{ matrix.tvOSDestination }}" ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c
+          xcodebuild build -project "${{ env.TVOS_EXAMPLE_XCODEPROJ }}" -scheme "${{ env.EXAMPLE_SCHEME }}" -destination "${{ matrix.tvOSDestination }}" -configuration Debug ONLY_ACTIVE_ARCH=YES CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c
 
       - name: Build macOS Example - ${{ matrix.macOSDestination }}
         run: |
           set -o pipefail
-          xcodebuild build -project "${{ env.MACOS_EXAMPLE_XCODEPROJ }}" -scheme "${{ env.EXAMPLE_SCHEME }}" -destination "${{ matrix.macOSDestination }}" ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c
+          xcodebuild build -project "${{ env.MACOS_EXAMPLE_XCODEPROJ }}" -scheme "${{ env.EXAMPLE_SCHEME }}" -destination "${{ matrix.macOSDestination }}" -configuration Debug ONLY_ACTIVE_ARCH=YES CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c
 
       - name: Build Mac Catalyst Example - ${{ matrix.macCatalystDestination }}
         run: |
           set -o pipefail
-          xcodebuild build -project "${{ env.IOS_EXAMPLE_XCODEPROJ }}" -scheme "${{ env.EXAMPLE_SCHEME }}" -destination "${{ matrix.macCatalystDestination }}" ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c
+          xcodebuild build -project "${{ env.IOS_EXAMPLE_XCODEPROJ }}" -scheme "${{ env.EXAMPLE_SCHEME }}" -destination "${{ matrix.macCatalystDestination }}" -configuration Debug ONLY_ACTIVE_ARCH=YES CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c
 
   Danger:
     name: Run Danger
