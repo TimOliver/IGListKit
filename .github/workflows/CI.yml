@@ -226,7 +226,8 @@ jobs:
       - name: Build iOS Example - ${{ matrix.iosDestination }}
         run: |
           set -o pipefail
-          xcodebuild build -project "${{ env.IOS_EXAMPLE_XCODEPROJ }}" -scheme "${{ env.EXAMPLE_SCHEME }}" -destination "${{ matrix.iosDestination }}" ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c
+          xcodebuild build build-for-testing -project "${{ env.IOS_EXAMPLE_XCODEPROJ }}" -scheme "${{ env.EXAMPLE_SCHEME }}" -destination "${{ matrix.iosDestination }}" -configuration Debug ONLY_ACTIVE_ARCH=YES CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c
+          xcodebuild analyze test-without-building -project "${{ env.IOS_EXAMPLE_XCODEPROJ }}" -scheme "${{ env.EXAMPLE_SCHEME }}" -destination "${{ matrix.iosDestination }}" -configuration Debug ONLY_ACTIVE_ARCH=YES CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c
 
       - name: Run iOS Example's UI Tests - ${{ matrix.iosDestination }}
         run: |
